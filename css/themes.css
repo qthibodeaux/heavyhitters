@@ -1,0 +1,98 @@
+/* ==========================================================================
+   THEMES — 5 color presets + 5 font pairings, toggled via [data-theme]/[data-font]
+   All presets defined on :root so the customizer only needs to swap attrs.
+   ========================================================================== */
+
+:root{
+  --font-heading: 'Anton', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+
+/* ---------- Color presets ---------- */
+
+body[data-theme="classic"]{
+  --color-bg: #0f0f11;
+  --color-bg-alt: #17181b;
+  --color-surface: #1e2024;
+  --color-text: #f5f2ee;
+  --color-text-muted: #b8b4ad;
+  --color-primary: #c8102e;
+  --color-primary-hover: #a80d26;
+  --color-accent: #d4af37;
+  --color-border: #2c2e33;
+}
+
+body[data-theme="darkmodern"]{
+  --color-bg: #101010;
+  --color-bg-alt: #161616;
+  --color-surface: #1e1e1e;
+  --color-text: #f2f2f2;
+  --color-text-muted: #a3a3a3;
+  --color-primary: #e63946;
+  --color-primary-hover: #c72c38;
+  --color-accent: #ff6b6b;
+  --color-border: #2b2b2b;
+}
+
+body[data-theme="bluesteel"]{
+  --color-bg: #0b132b;
+  --color-bg-alt: #111a3a;
+  --color-surface: #17224a;
+  --color-text: #eef1f8;
+  --color-text-muted: #a9b3cc;
+  --color-primary: #3a86ff;
+  --color-primary-hover: #2a6fe0;
+  --color-accent: #8d99ae;
+  --color-border: #223061;
+}
+
+body[data-theme="gold"]{
+  --color-bg: #0d0d0d;
+  --color-bg-alt: #151310;
+  --color-surface: #1c1912;
+  --color-text: #f6f1e3;
+  --color-text-muted: #c2b593;
+  --color-primary: #f2b705;
+  --color-primary-hover: #d3a004;
+  --color-accent: #f2b705;
+  --color-border: #3a2e0f;
+}
+
+body[data-theme="neutral"]{
+  --color-bg: #141414;
+  --color-bg-alt: #1a1a1a;
+  --color-surface: #212121;
+  --color-text: #f0f0f0;
+  --color-text-muted: #a0a0a0;
+  --color-primary: #6b6b6b;
+  --color-primary-hover: #545454;
+  --color-accent: #9a9a9a;
+  --color-border: #2e2e2e;
+}
+
+/* ---------- Font pairings ---------- */
+
+body[data-font="anton-barlow"]{
+  --font-heading: 'Anton', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+
+body[data-font="bebas-oswald"]{
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-body: 'Oswald', sans-serif;
+}
+
+body[data-font="oswald-roboto"]{
+  --font-heading: 'Oswald', sans-serif;
+  --font-body: 'Roboto Condensed', sans-serif;
+}
+
+body[data-font="teko-rajdhani"]{
+  --font-heading: 'Teko', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+}
+
+body[data-font="rajdhani-inter"]{
+  --font-heading: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
