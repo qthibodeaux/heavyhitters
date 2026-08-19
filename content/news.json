@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "date": "2026-09-25",
+      "dateLabel": "Sep 25, 2026",
+      "tag": "Championship",
+      "title": "Reed vs Stone: The Build Up",
+      "excerpt": "Tensions rise as both camps trade words ahead of the heavyweight title clash in Houston.",
+      "link": "#"
+    },
+    {
+      "date": "2026-09-20",
+      "dateLabel": "Sep 20, 2026",
+      "tag": "Behind The Scenes",
+      "title": "Training Camp Insights: Silva",
+      "excerpt": "A look inside camp as Silva prepares for his rematch with Marcus Vane.",
+      "link": "#"
+    },
+    {
+      "date": "2026-09-10",
+      "dateLabel": "Sep 10, 2026",
+      "tag": "Announcement",
+      "title": "New Signings Added To Roster",
+      "excerpt": "Heavy Hitters Promotions expands its stable with three new professional signings.",
+      "link": "#"
+    },
+    {
+      "date": "2025-11-12",
+      "dateLabel": "Nov 12, 2025",
+      "tag": "Interview",
+      "title": "Cross vs Dixon: Post-Fight Breakdown",
+      "excerpt": "Damian Cross breaks down his third-round knockout win over Ray Dixon.",
+      "link": "#"
+    }
+  ]
+}

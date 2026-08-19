@@ -96,3 +96,19 @@ body[data-font="rajdhani-inter"]{
   --font-heading: 'Rajdhani', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
+
+body[data-font="bigshoulders-worksans"]{
+  --font-heading: 'Big Shoulders Display', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+}
+body[data-font="bigshoulders-worksans"] h1,
+body[data-font="bigshoulders-worksans"] h2,
+body[data-font="bigshoulders-worksans"] h3,
+body[data-font="bigshoulders-worksans"] h4{
+  font-weight: 800;
+}
+
+body[data-font="staatliches-archivo"]{
+  --font-heading: 'Staatliches', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+}

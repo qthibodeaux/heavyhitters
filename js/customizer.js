@@ -2,7 +2,7 @@
   'use strict';
 
   var DEFAULT_THEME = 'classic';
-  var DEFAULT_FONT = 'anton-barlow';
+  var DEFAULT_FONT = 'bigshoulders-worksans';
   var STORAGE_KEY = 'hh-demo-theme';
 
   var body = document.body;

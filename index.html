@@ -9,12 +9,12 @@
 <!-- Google Fonts: 5 boxing/sports-appropriate pairings, swapped live by the customizer -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@400;500;700&family=Teko:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@400;500;700&family=Teko:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800;900&family=Work+Sans:wght@400;500;600;700&family=Staatliches&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/themes.css">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-theme="classic" data-font="anton-barlow">
+<body data-theme="classic" data-font="bigshoulders-worksans">
 
 <!-- ================= HEADER ================= -->
 <header class="site-header" id="siteHeader">
@@ -22,10 +22,11 @@
     <a href="#hero" class="logo">HEAVY<span>HITTERS</span></a>
 
     <nav class="main-nav" id="mainNav">
-      <a href="#next-fight">Next Fight</a>
-      <a href="#past-events">Past Events</a>
+      <a href="#roster">Fighters</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#news">News</a>
       <a href="#contact">Contact</a>
-      <a href="#next-fight" class="btn btn-primary btn-sm">Buy Tickets</a>
+      <a href="#schedule" class="btn btn-primary btn-sm">Buy Tickets</a>
     </nav>
 
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -37,121 +38,48 @@
 <!-- ================= HERO ================= -->
 <section class="hero" id="hero">
   <div class="hero-media" aria-hidden="true">
-    <!-- PLACEHOLDER: swap this gradient block for client hero video/photo -->
-    <div class="hero-media-fallback"></div>
+    <img class="hero-media-img" id="heroImg" src="img/hero-ring.png" alt="">
   </div>
   <div class="hero-overlay"></div>
 
   <div class="container hero-content">
-    <p class="eyebrow reveal">Houston &middot; Championship Boxing</p>
-    <h1 class="hero-title reveal">WHERE LEGENDS<br>ARE MADE</h1>
-    <p class="hero-sub reveal">Heavy Hitters Promotions brings world-class fight nights to your city. Raw power. Real stakes. One night to remember.</p>
+    <p class="eyebrow reveal" id="heroEyebrow"></p>
+    <h1 class="hero-title reveal" id="heroTitle"></h1>
+    <p class="hero-sub reveal" id="heroSub"></p>
     <div class="hero-actions reveal">
-      <a href="#next-fight" class="btn btn-primary btn-lg">Get Tickets</a>
-      <a href="#past-events" class="btn btn-outline btn-lg">Watch Highlights</a>
+      <a href="#schedule" class="btn btn-primary btn-lg">View Schedule</a>
+      <a href="#roster" class="btn btn-outline btn-lg">Meet The Roster</a>
     </div>
   </div>
 
-  <div class="hero-placeholder-tag">Hero media placeholder &mdash; final video/photo pending client assets</div>
-
-  <a href="#next-fight" class="scroll-cue" aria-label="Scroll to next section">
+  <a href="#schedule" class="scroll-cue" aria-label="Scroll to next section">
     <span></span>
   </a>
 </section>
 
-<!-- ================= NEXT FIGHT ================= -->
-<section class="next-fight" id="next-fight">
+<!-- ================= SCHEDULE / FIGHT CARDS ================= -->
+<section class="schedule" id="schedule">
   <div class="container">
-    <p class="section-eyebrow reveal">Main Event</p>
-    <h2 class="section-title reveal">Next Fight Night</h2>
+    <p class="section-eyebrow reveal">The Card</p>
+    <h2 class="section-title reveal">Upcoming Fights</h2>
+    <p class="section-sub reveal">Three fight nights on the books. Tap in for tickets, matchups, and fight-week updates.</p>
 
-    <div class="matchup reveal">
-      <div class="fighter">
-        <div class="fighter-photo" aria-hidden="true"><span>Fighter A</span></div>
-        <h3>&ldquo;The Storm&rdquo; Marcus Reyes</h3>
-        <p class="record">18-0-0 &middot; 14 KOs</p>
-      </div>
-
-      <div class="vs-block">
-        <span class="vs">VS</span>
-        <p class="weight-class">Cruiserweight Title Bout</p>
-      </div>
-
-      <div class="fighter">
-        <div class="fighter-photo" aria-hidden="true"><span>Fighter B</span></div>
-        <h3>&ldquo;Iron&rdquo; Dante Cole</h3>
-        <p class="record">21-1-0 &middot; 16 KOs</p>
-      </div>
-    </div>
-
-    <div class="event-details reveal">
-      <div class="detail"><span class="detail-label">Date</span><span class="detail-value" id="eventDateLabel">Saturday, October 3, 2026</span></div>
-      <div class="detail"><span class="detail-label">Venue</span><span class="detail-value">Toyota Center &mdash; Houston, TX</span></div>
-      <div class="detail"><span class="detail-label">Doors</span><span class="detail-value">6:00 PM &middot; First Bell 7:30 PM</span></div>
-    </div>
-
-    <!-- COUNTDOWN TICKER -->
-    <div class="countdown reveal" id="countdown" data-target="2026-10-03T19:30:00">
-      <div class="countdown-unit"><span class="countdown-num" id="cdDays">00</span><span class="countdown-label">Days</span></div>
-      <div class="countdown-unit"><span class="countdown-num" id="cdHours">00</span><span class="countdown-label">Hours</span></div>
-      <div class="countdown-unit"><span class="countdown-num" id="cdMinutes">00</span><span class="countdown-label">Minutes</span></div>
-      <div class="countdown-unit"><span class="countdown-num" id="cdSeconds">00</span><span class="countdown-label">Seconds</span></div>
-    </div>
-
-    <div class="reveal" style="text-align:center;">
-      <a href="#contact" class="btn btn-primary btn-lg">Buy Tickets Now</a>
-    </div>
+    <div class="fight-list" id="fightList"></div>
   </div>
 </section>
 
-<!-- ================= PAST EVENTS ================= -->
-<section class="past-events" id="past-events">
+<!-- ================= PAST RESULTS ================= -->
+<section class="past-events" id="results">
   <div class="container">
     <p class="section-eyebrow reveal">The Archive</p>
-    <h2 class="section-title reveal">Past Events</h2>
+    <h2 class="section-title reveal">Past Results</h2>
     <p class="section-sub reveal">Tap a card for fight recaps, results, and media from previous events.</p>
 
-    <div class="events-grid">
-      <button class="event-card reveal" data-event="1">
-        <div class="event-card-media" aria-hidden="true"></div>
-        <div class="event-card-body">
-          <span class="event-date">June 14, 2025</span>
-          <h3>Night of Champions</h3>
-          <p>Reyes def. Ortiz &middot; TKO Round 7</p>
-        </div>
-      </button>
-
-      <button class="event-card reveal" data-event="2">
-        <div class="event-card-media" aria-hidden="true"></div>
-        <div class="event-card-body">
-          <span class="event-date">February 22, 2025</span>
-          <h3>Winter Brawl</h3>
-          <p>Cole def. Vasquez &middot; Unanimous Decision</p>
-        </div>
-      </button>
-
-      <button class="event-card reveal" data-event="3">
-        <div class="event-card-media" aria-hidden="true"></div>
-        <div class="event-card-body">
-          <span class="event-date">November 9, 2024</span>
-          <h3>Homecoming Showdown</h3>
-          <p>Reyes def. Blackwell &middot; KO Round 3</p>
-        </div>
-      </button>
-
-      <button class="event-card reveal" data-event="4">
-        <div class="event-card-media" aria-hidden="true"></div>
-        <div class="event-card-body">
-          <span class="event-date">August 3, 2024</span>
-          <h3>Summer Slugfest</h3>
-          <p>Cole def. Nguyen &middot; TKO Round 5</p>
-        </div>
-      </button>
-    </div>
+    <div class="events-grid" id="resultsGrid"></div>
   </div>
 </section>
 
-<!-- Past Event Modal -->
+<!-- Past Result Modal -->
 <div class="modal" id="eventModal" aria-hidden="true">
   <div class="modal-backdrop" data-close-modal></div>
   <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -166,6 +94,28 @@
   </div>
 </div>
 
+<!-- ================= ROSTER ================= -->
+<section class="roster" id="roster">
+  <div class="container">
+    <p class="section-eyebrow reveal">The Team</p>
+    <h2 class="section-title reveal">The Roster</h2>
+    <p class="section-sub reveal">Pound-for-pound the most dangerous athletes on the roster.</p>
+
+    <div class="roster-list" id="rosterList"></div>
+  </div>
+</section>
+
+<!-- ================= NEWS ================= -->
+<section class="news" id="news">
+  <div class="container">
+    <p class="section-eyebrow reveal">Headlines</p>
+    <h2 class="section-title reveal">Latest News</h2>
+    <p class="section-sub reveal">Fight-week buildup, camp access, and roster announcements.</p>
+
+    <div class="news-list" id="newsList"></div>
+  </div>
+</section>
+
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="container contact-grid">
@@ -174,9 +124,9 @@
       <h2 class="section-title">Contact Us</h2>
       <p class="section-sub">Ticket questions, sponsorships, press inquiries &mdash; reach out and our team will get back to you within 1&ndash;2 business days.</p>
       <ul class="contact-info">
-        <li><strong>Phone</strong><span>(713) 555-0142</span></li>
-        <li><strong>Email</strong><span>info@heavyhitterspromotions.com</span></li>
-        <li><strong>Office</strong><span>Houston, TX</span></li>
+        <li><strong>Phone</strong><span id="contactPhone"></span></li>
+        <li><strong>Email</strong><span id="contactEmail"></span></li>
+        <li><strong>Office</strong><span id="contactOffice"></span></li>
       </ul>
     </div>
 
@@ -227,8 +177,9 @@
 
     <div class="footer-links">
       <h4>Explore</h4>
-      <a href="#next-fight">Next Fight</a>
-      <a href="#past-events">Past Events</a>
+      <a href="#roster">Fighters</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#news">News</a>
       <a href="#contact">Contact</a>
     </div>
 
@@ -252,7 +203,7 @@
   </div>
   <div class="footer-bottom">
     <div class="container">
-      <p>&copy; 2026 Heavy Hitters Promotions. All rights reserved. &mdash; Template build, assets pending.</p>
+      <p>&copy; 2026 Heavy Hitters Promotions. All rights reserved. &mdash; Template build, fighter photos pending client assets.</p>
     </div>
   </div>
 </footer>
@@ -300,6 +251,8 @@
         <button class="font-option" data-font="oswald-roboto"><span class="font-option-name" style="font-family:'Oswald',sans-serif;">Oswald / Roboto Condensed</span><span class="font-option-desc">Clean athletic</span></button>
         <button class="font-option" data-font="teko-rajdhani"><span class="font-option-name" style="font-family:'Teko',sans-serif;">Teko / Rajdhani</span><span class="font-option-desc">Sharp, technical</span></button>
         <button class="font-option" data-font="rajdhani-inter"><span class="font-option-name" style="font-family:'Rajdhani',sans-serif;">Rajdhani / Inter</span><span class="font-option-desc">Modern, sleek</span></button>
+        <button class="font-option" data-font="bigshoulders-worksans"><span class="font-option-name" style="font-family:'Big Shoulders Display',sans-serif;font-weight:800;">Big Shoulders / Work Sans</span><span class="font-option-desc">Industrial, distinctive</span></button>
+        <button class="font-option" data-font="staatliches-archivo"><span class="font-option-name" style="font-family:'Staatliches',sans-serif;">Staatliches / Archivo</span><span class="font-option-desc">Poster, fight-bill energy</span></button>
       </div>
     </div>
 

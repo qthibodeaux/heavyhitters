@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "eyebrow": "Houston · Championship Boxing",
+    "titleLine1": "WHERE LEGENDS",
+    "titleLine2": "ARE MADE",
+    "subhead": "Heavy Hitters Promotions brings world-class fight nights to your city. Raw power. Real stakes. One night to remember.",
+    "image": "img/hero-ring.png"
+  },
+  "contact": {
+    "phone": "(713) 555-0142",
+    "email": "info@heavyhitterspromotions.com",
+    "office": "Houston, TX"
+  }
+}

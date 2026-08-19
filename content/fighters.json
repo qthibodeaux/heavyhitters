@@ -1,0 +1,84 @@
+{
+  "fighters": [
+    {
+      "name": "Jaxon “Iron” Reed",
+      "division": "Heavyweight",
+      "wins": 24,
+      "losses": 0,
+      "draws": 0,
+      "kos": 20,
+      "photo": "",
+      "bio": "A Houston native who turned pro in 2019, Reed built his reputation on a suffocating pressure style and has stopped 20 of his 24 opponents inside the distance. He headlines Thunder in Paradise this October in a career-defining heavyweight title clash."
+    },
+    {
+      "name": "Marcus “The Viper” Vane",
+      "division": "Middleweight",
+      "wins": 19,
+      "losses": 1,
+      "draws": 0,
+      "kos": 14,
+      "photo": "",
+      "bio": "Known for fight-ending combinations delivered in flurries, Vane avenged an early setback with a twelve-round decision win over Leon Silva in February — and now heads into a rematch as the man to beat at 160."
+    },
+    {
+      "name": "Elias “Ghost” Stone",
+      "division": "Heavyweight",
+      "wins": 31,
+      "losses": 2,
+      "draws": 0,
+      "kos": 22,
+      "photo": "",
+      "bio": "A veteran of the division with the most fights on the roster, Stone earned his nickname for a defensive style that makes him nearly impossible to find clean. He meets Jaxon Reed for the heavyweight title in October."
+    },
+    {
+      "name": "Damian “Ruthless” Cross",
+      "division": "Welterweight",
+      "wins": 15,
+      "losses": 0,
+      "draws": 0,
+      "kos": 11,
+      "photo": "",
+      "bio": "Undefeated through fifteen professional bouts, Cross scored a third-round knockout over Ray Dixon in his hometown debut and returns to face him again this December in a highly anticipated rematch."
+    },
+    {
+      "name": "Leon “The King” Silva",
+      "division": "Middleweight",
+      "wins": 28,
+      "losses": 3,
+      "draws": 0,
+      "kos": 19,
+      "photo": "",
+      "bio": "A former title challenger with over a decade of experience, Silva is looking to reclaim his standing at 160 after a razor-close decision loss to Marcus Vane earlier this year."
+    },
+    {
+      "name": "Victor “Savage” Kane",
+      "division": "Lightweight",
+      "wins": 22,
+      "losses": 1,
+      "draws": 0,
+      "kos": 17,
+      "photo": "",
+      "bio": "One of the promotion's hardest hitters pound-for-pound, Kane's only loss came against a former champion. He's currently rebuilding toward a title shot at lightweight."
+    },
+    {
+      "name": "Tyler “Titan” Bradley",
+      "division": "Heavyweight",
+      "wins": 12,
+      "losses": 0,
+      "draws": 0,
+      "kos": 10,
+      "photo": "",
+      "bio": "The roster's fastest-rising prospect, Bradley turned heads with a seventh-round stoppage of Victor Kane at Night of Champions and remains undefeated as he climbs the heavyweight rankings."
+    },
+    {
+      "name": "Ray “Bullet” Dixon",
+      "division": "Welterweight",
+      "wins": 20,
+      "losses": 2,
+      "draws": 0,
+      "kos": 14,
+      "photo": "",
+      "bio": "A come-forward brawler known for his work rate, Dixon is looking to settle the score with Damian Cross in their December rematch after a knockout loss in their first meeting."
+    }
+  ]
+}
