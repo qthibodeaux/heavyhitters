@@ -9,12 +9,15 @@
 <body>
   <div style="font-family:sans-serif;padding:14px 20px;background:#7a1620;color:#fff;font-size:13px;">
     <strong>Demo mode.</strong> This is a sandbox copy of the CMS for showing the client how adding/editing/removing
-    content works. Changes here live only in this browser tab and are never saved to the real site or repo — refresh
-    the page to reset back to the live content. The real editor (once Netlify is set up) lives at
-    <code>/admin/</code>.
+    content works. When you hit <strong>Publish</strong>, the change is saved to this browser (not the real site or
+    repo) so you can go back to the live page and see it reflected — the live page will show a red banner when it's
+    displaying demo content. Refresh this admin page, or use the banner's reset button on the live site, to clear it.
+    The real editor (once Netlify is set up) lives at <code>/admin/</code>.
   </div>
   <script>
     (function(){
+      var DEMO_OVERRIDE_PREFIX = 'hh-demo-override:';
+
       function readText(path){
         return fetch(path).then(function(res){
           if(!res.ok) throw new Error('Failed to load ' + path + ' (' + res.status + ')');
@@ -39,10 +42,35 @@
         var script = document.createElement('script');
         script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
         document.body.appendChild(script);
+        startDemoBridgePolling();
       }).catch(function(err){
         document.body.insertAdjacentHTML('beforeend',
           '<p style="color:#f66;padding:16px;font-family:sans-serif;">Could not load demo content: ' + err.message + '</p>');
       });
+
+      // test-repo's backend reads/writes window.repoFiles directly as its store of
+      // truth (that's how we seeded it above). Rather than depend on exactly which
+      // Decap lifecycle event fires for a given save/publish action, just watch that
+      // object for changes and mirror them into localStorage — simpler and more
+      // reliable than chasing internal event-hook timing.
+      function startDemoBridgePolling(){
+        // Seed lastSeen with the initial (unedited) content so the first poll tick
+        // doesn't immediately treat the seed data itself as a change.
+        var lastSeen = {};
+        Object.keys(window.repoFiles.content).forEach(function(filename){
+          lastSeen[filename] = window.repoFiles.content[filename].content;
+        });
+        setInterval(function(){
+          if(!window.repoFiles || !window.repoFiles.content) return;
+          Object.keys(window.repoFiles.content).forEach(function(filename){
+            var file = window.repoFiles.content[filename];
+            if(!file || typeof file.content !== 'string') return;
+            if(lastSeen[filename] === file.content) return;
+            lastSeen[filename] = file.content;
+            localStorage.setItem(DEMO_OVERRIDE_PREFIX + file.path, file.content);
+          });
+        }, 800);
+      }
     })();
   </script>
 </body>

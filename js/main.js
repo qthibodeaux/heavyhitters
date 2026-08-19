@@ -284,25 +284,63 @@
     }).join('');
   }
 
+  /* ---------- Demo content overrides ----------
+     admin/demo.html (the sandboxed test-repo CMS demo) writes saved entries
+     here on Publish, keyed by content file path, so a customer can go from
+     the demo editor back to this page in the same browser and see the
+     change — without a real backend. This never touches the real
+     content/*.json files; it's a per-browser localStorage layer only. */
+  var DEMO_OVERRIDE_PREFIX = 'hh-demo-override:';
+
+  function getDemoOverride(path){
+    try{
+      var raw = localStorage.getItem(DEMO_OVERRIDE_PREFIX + path);
+      return raw ? JSON.parse(raw) : null;
+    } catch(e){ return null; }
+  }
+
+  function clearDemoOverrides(){
+    var keys = [];
+    for(var i = 0; i < localStorage.length; i++){
+      var key = localStorage.key(i);
+      if(key && key.indexOf(DEMO_OVERRIDE_PREFIX) === 0) keys.push(key);
+    }
+    keys.forEach(function(key){ localStorage.removeItem(key); });
+  }
+
+  function setupDemoBanner(hasOverrides){
+    var banner = document.getElementById('demoBanner');
+    if(!banner) return;
+    banner.hidden = !hasOverrides;
+    document.body.classList.toggle('has-demo-banner', hasOverrides);
+    var resetBtn = document.getElementById('demoBannerReset');
+    if(resetBtn){
+      resetBtn.addEventListener('click', function(){
+        clearDemoOverrides();
+        window.location.reload();
+      });
+    }
+  }
+
   /* ---------- Boot: fetch all content, render, then wire up behavior ---------- */
   function fetchJson(path){
+    var override = getDemoOverride(path);
+    if(override) return Promise.resolve(override);
     return fetch(path).then(function(res){
       if(!res.ok) throw new Error('Failed to load ' + path + ' (' + res.status + ')');
       return res.json();
     });
   }
 
-  Promise.all([
-    fetchJson('content/settings.json'),
-    fetchJson('content/fights.json'),
-    fetchJson('content/fighters.json'),
-    fetchJson('content/news.json')
-  ]).then(function(results){
+  var CONTENT_PATHS = ['content/settings.json', 'content/fights.json', 'content/fighters.json', 'content/news.json'];
+
+  Promise.all(CONTENT_PATHS.map(fetchJson)).then(function(results){
     var settings = results[0];
     var fightsData = results[1];
     var fightersData = results[2];
     var newsData = results[3];
 
+    setupDemoBanner(CONTENT_PATHS.some(function(p){ return !!getDemoOverride(p); }));
     renderSettings(settings);
     var fightsResult = renderFights(fightsData.fights || []);
     renderRoster(fightersData.fighters || []);
