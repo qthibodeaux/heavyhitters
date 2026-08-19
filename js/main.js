@@ -214,7 +214,7 @@
         '</article>'
       );
     }).join('');
-    fightListEl.innerHTML = fightCardsHtml;
+    fightListEl.innerHTML = fightCardsHtml || '<p class="empty-state reveal">No fights scheduled yet — check back soon.</p>';
 
     var eventData = {};
     var resultsHtml = completed.map(function(fight, i){
@@ -236,7 +236,7 @@
         '</button>'
       );
     }).join('');
-    resultsGridEl.innerHTML = resultsHtml;
+    resultsGridEl.innerHTML = resultsHtml || '<p class="empty-state reveal">No past results yet — this section fills in after the first event.</p>';
 
     return { eventData: eventData };
   }

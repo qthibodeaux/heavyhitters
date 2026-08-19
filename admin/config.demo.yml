@@ -48,7 +48,9 @@ collections:
               - label: "Status"
                 name: "status"
                 widget: "select"
-                options: ["upcoming", "completed"]
+                options:
+                  - { label: "Upcoming", value: "upcoming" }
+                  - { label: "Completed", value: "completed" }
                 hint: "Upcoming fights show on the Schedule with a countdown on the soonest one. Completed fights show in Past Results."
               - { label: "Fight / Event Name", name: "title", widget: "string" }
               - { label: "Date & Time", name: "date", widget: "datetime", hint: "Drives sorting and the countdown timer." }
