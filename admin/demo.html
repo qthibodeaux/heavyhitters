@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heavy Hitters — CMS Demo</title>
+  <link href="config.demo.yml" rel="cms-config-url" type="text/yaml">
+</head>
+<body>
+  <div style="font-family:sans-serif;padding:14px 20px;background:#7a1620;color:#fff;font-size:13px;">
+    <strong>Demo mode.</strong> This is a sandbox copy of the CMS for showing the client how adding/editing/removing
+    content works. Changes here live only in this browser tab and are never saved to the real site or repo — refresh
+    the page to reset back to the live content. The real editor (once Netlify is set up) lives at
+    <code>/admin/</code>.
+  </div>
+  <script>
+    (function(){
+      function readText(path){
+        return fetch(path).then(function(res){
+          if(!res.ok) throw new Error('Failed to load ' + path + ' (' + res.status + ')');
+          return res.text();
+        });
+      }
+
+      Promise.all([
+        readText('../content/settings.json'),
+        readText('../content/fights.json'),
+        readText('../content/fighters.json'),
+        readText('../content/news.json')
+      ]).then(function(results){
+        window.repoFiles = {
+          content: {
+            'settings.json': { path: 'content/settings.json', content: results[0] },
+            'fights.json': { path: 'content/fights.json', content: results[1] },
+            'fighters.json': { path: 'content/fighters.json', content: results[2] },
+            'news.json': { path: 'content/news.json', content: results[3] }
+          }
+        };
+        var script = document.createElement('script');
+        script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        document.body.appendChild(script);
+      }).catch(function(err){
+        document.body.insertAdjacentHTML('beforeend',
+          '<p style="color:#f66;padding:16px;font-family:sans-serif;">Could not load demo content: ' + err.message + '</p>');
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+# DEMO ONLY — used by admin/demo.html via the test-repo backend below.
+# Nothing saved here touches the real GitHub repo or the live site; it lives
+# in this browser tab only and resets on refresh. See admin/config.yml for
+# the real production config (git-gateway, requires Netlify Identity).
+backend:
+  name: test-repo
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - file: "content/settings.json"
+        label: "General Settings"
+        name: "general"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Title — Line 1", name: "titleLine1", widget: "string" }
+              - { label: "Title — Line 2", name: "titleLine2", widget: "string" }
+              - { label: "Subheading", name: "subhead", widget: "text" }
+              - { label: "Background Image", name: "image", widget: "image" }
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Phone", name: "phone", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Office", name: "office", widget: "string" }
+
+  - name: "fights"
+    label: "Fights"
+    files:
+      - file: "content/fights.json"
+        label: "Fight Schedule & Results"
+        name: "fights"
+        fields:
+          - label: "Fights"
+            name: "fights"
+            widget: "list"
+            summary: "{{title}} — {{status}}"
+            fields:
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options: ["upcoming", "completed"]
+                hint: "Upcoming fights show on the Schedule with a countdown on the soonest one. Completed fights show in Past Results."
+              - { label: "Fight / Event Name", name: "title", widget: "string" }
+              - { label: "Date & Time", name: "date", widget: "datetime", hint: "Drives sorting and the countdown timer." }
+              - { label: "Date Label", name: "dateLabel", widget: "string", hint: "How the date displays on the card, e.g. Oct 3, 2026" }
+              - { label: "Badge (upcoming only)", name: "badge", widget: "string", required: false, hint: "e.g. Main Event, Title Fight, Upcoming" }
+              - { label: "Venue (upcoming only)", name: "venue", widget: "string", required: false }
+              - { label: "Weight Class / Rounds (upcoming only)", name: "weightClass", widget: "string", required: false }
+              - { label: "Ticket Link (upcoming only)", name: "ticketLink", widget: "string", required: false, default: "#contact" }
+              - label: "Fighter A (upcoming only)"
+                name: "fighterA"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Record", name: "record", widget: "string", hint: "e.g. 24-0-0 · 20 KO" }
+                  - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Leave blank to show a placeholder silhouette" }
+              - label: "Fighter B (upcoming only)"
+                name: "fighterB"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Record", name: "record", widget: "string" }
+                  - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Leave blank to show a placeholder silhouette" }
+              - { label: "Result (completed only)", name: "result", widget: "string", required: false, hint: "Short one-liner, e.g. Bradley def. Kane · TKO Round 7" }
+              - { label: "Recap (completed only)", name: "recap", widget: "text", required: false, hint: "Longer paragraph shown when a visitor clicks the result card" }
+
+  - name: "fighters"
+    label: "Fighters"
+    files:
+      - file: "content/fighters.json"
+        label: "Fighter Roster"
+        name: "fighters"
+        fields:
+          - label: "Fighters"
+            name: "fighters"
+            widget: "list"
+            summary: "{{name}} — {{division}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - label: "Division"
+                name: "division"
+                widget: "select"
+                options: ["Heavyweight", "Cruiserweight", "Light Heavyweight", "Middleweight", "Welterweight", "Lightweight", "Featherweight", "Bantamweight"]
+              - { label: "Wins", name: "wins", widget: "number", value_type: "int", min: 0 }
+              - { label: "Losses", name: "losses", widget: "number", value_type: "int", min: 0 }
+              - { label: "Draws", name: "draws", widget: "number", value_type: "int", min: 0 }
+              - { label: "KOs", name: "kos", widget: "number", value_type: "int", min: 0 }
+              - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Leave blank to show a placeholder silhouette" }
+              - { label: "Bio", name: "bio", widget: "text" }
+
+  - name: "news"
+    label: "News"
+    files:
+      - file: "content/news.json"
+        label: "News Posts"
+        name: "news"
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Date", name: "date", widget: "datetime" }
+              - { label: "Date Label", name: "dateLabel", widget: "string", hint: "How the date displays, e.g. Sep 25, 2026" }
+              - { label: "Tag", name: "tag", widget: "string", hint: "e.g. Championship, Interview, Announcement" }
+              - { label: "Headline", name: "title", widget: "string" }
+              - { label: "Excerpt", name: "excerpt", widget: "text" }
+              - { label: "Link", name: "link", widget: "string", required: false, default: "#" }
