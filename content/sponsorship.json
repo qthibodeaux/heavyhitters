@@ -1,0 +1,102 @@
+{
+  "pitch": {
+    "eyebrow": "Partner With Us",
+    "heading": "Grow Your Brand In The Ring",
+    "body": "Heavy Hitters Promotions puts your brand in front of a passionate, growing fight community — from fight night energy to year-round digital reach. Whether you're looking for regional visibility or a marquee event partnership, we'll build a package that fits your goals."
+  },
+  "stats": [
+    { "value": "5,000+", "label": "Fans Per Event" },
+    { "value": "50K+", "label": "Combined Social Reach" },
+    { "value": "12", "label": "Events Per Year" },
+    { "value": "8", "label": "Fighters On Roster" }
+  ],
+  "offerings": [
+    {
+      "title": "Ring Banner",
+      "description": "Prime ringside visibility — seen by every camera angle and every seat in the house all night long."
+    },
+    {
+      "title": "Fighter Walkout",
+      "description": "Your brand featured in the entrance video and walkout for one of our fighters."
+    },
+    {
+      "title": "VIP Suite Branding",
+      "description": "A branded hospitality space to host your top clients and prospects fight night."
+    },
+    {
+      "title": "Broadcast Graphics",
+      "description": "On-screen logo placement during the livestream broadcast and post-fight replays."
+    },
+    {
+      "title": "Social Media Takeover",
+      "description": "Dedicated posts and stories across our event social channels in the lead-up to fight night."
+    },
+    {
+      "title": "Title Naming Rights",
+      "description": "The event presented by your brand, front and center on every piece of promotion."
+    }
+  ],
+  "tiers": [
+    {
+      "name": "Bronze",
+      "price": "$2,500",
+      "period": "per event",
+      "featured": false,
+      "perks": [
+        "Logo placement on event signage",
+        "Mention in the event program",
+        "Social media shoutout"
+      ]
+    },
+    {
+      "name": "Silver",
+      "price": "$5,000",
+      "period": "per event",
+      "featured": false,
+      "perks": [
+        "Everything in Bronze",
+        "Ring apron logo placement",
+        "4 VIP tickets",
+        "Logo on website sponsor page"
+      ]
+    },
+    {
+      "name": "Gold",
+      "price": "$10,000",
+      "period": "per event",
+      "featured": false,
+      "perks": [
+        "Everything in Silver",
+        "Ring banner placement",
+        "10 VIP tickets + VIP suite access",
+        "Co-branded social content"
+      ]
+    },
+    {
+      "name": "Title Sponsor",
+      "price": "$25,000",
+      "period": "per event",
+      "featured": true,
+      "perks": [
+        "Event presented by your brand",
+        "Premier logo placement across all materials",
+        "Broadcast & livestream mentions",
+        "20 VIP tickets + dedicated activation space"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Partnering with Heavy Hitters put our brand in front of exactly the audience we wanted — energetic, engaged, and still talking about us long after the final bell.",
+      "name": "J. Ramirez",
+      "title": "Marketing Director",
+      "company": "Lonestar Auto Group"
+    },
+    {
+      "quote": "The turnout and energy at fight night gave us more brand exposure than a full quarter of traditional advertising.",
+      "name": "S. Okafor",
+      "title": "Owner",
+      "company": "Bayou City Brewing Co."
+    }
+  ]
+}

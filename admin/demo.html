@@ -17,6 +17,7 @@
   <script>
     (function(){
       var DEMO_OVERRIDE_PREFIX = 'hh-demo-override:';
+      var CONTENT_FILES = ['settings.json', 'fights.json', 'fighters.json', 'news.json', 'sponsorship.json'];
 
       function readText(path){
         return fetch(path).then(function(res){
@@ -25,20 +26,13 @@
         });
       }
 
-      Promise.all([
-        readText('../content/settings.json'),
-        readText('../content/fights.json'),
-        readText('../content/fighters.json'),
-        readText('../content/news.json')
-      ]).then(function(results){
-        window.repoFiles = {
-          content: {
-            'settings.json': { path: 'content/settings.json', content: results[0] },
-            'fights.json': { path: 'content/fights.json', content: results[1] },
-            'fighters.json': { path: 'content/fighters.json', content: results[2] },
-            'news.json': { path: 'content/news.json', content: results[3] }
-          }
-        };
+      Promise.all(CONTENT_FILES.map(function(name){ return readText('../content/' + name); }))
+      .then(function(results){
+        var content = {};
+        CONTENT_FILES.forEach(function(name, i){
+          content[name] = { path: 'content/' + name, content: results[i] };
+        });
+        window.repoFiles = { content: content };
         var script = document.createElement('script');
         script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
         document.body.appendChild(script);

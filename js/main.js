@@ -265,6 +265,75 @@
     }).join('');
   }
 
+  /* ---------- Render: sponsorship pitch, stats, offerings, tiers, testimonials from content/sponsorship.json ---------- */
+  function renderSponsorship(data){
+    var pitch = data.pitch || {};
+    var eyebrowEl = document.getElementById('sponsorEyebrow');
+    var headingEl = document.getElementById('sponsorHeading');
+    var bodyEl = document.getElementById('sponsorBody');
+    if(eyebrowEl) eyebrowEl.textContent = pitch.eyebrow || '';
+    if(headingEl) headingEl.textContent = pitch.heading || '';
+    if(bodyEl) bodyEl.textContent = pitch.body || '';
+
+    var statStripEl = document.getElementById('statStrip');
+    if(statStripEl){
+      var stats = data.stats || [];
+      statStripEl.innerHTML = stats.map(function(stat){
+        return (
+          '<div class="stat-tile reveal">' +
+            '<span class="stat-tile-value">' + escapeHtml(stat.value) + '</span>' +
+            '<span class="stat-tile-label">' + escapeHtml(stat.label) + '</span>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    var offeringsEl = document.getElementById('offeringsGrid');
+    if(offeringsEl){
+      var offerings = data.offerings || [];
+      offeringsEl.innerHTML = offerings.map(function(offering){
+        return (
+          '<article class="offering-card reveal">' +
+            '<h4 class="offering-title">' + escapeHtml(offering.title) + '</h4>' +
+            '<p class="offering-desc">' + escapeHtml(offering.description || '') + '</p>' +
+          '</article>'
+        );
+      }).join('');
+    }
+
+    var gridEl = document.getElementById('tierGrid');
+    if(gridEl){
+      var tiers = data.tiers || [];
+      gridEl.innerHTML = tiers.map(function(tier){
+        var featuredClass = tier.featured ? ' tier-card--featured' : '';
+        var perksHtml = (tier.perks || []).map(function(perk){
+          return '<li>' + escapeHtml(perk) + '</li>';
+        }).join('');
+        return (
+          '<article class="tier-card' + featuredClass + ' reveal">' +
+            (tier.featured ? '<span class="status-chip status-chip--accent tier-badge">Most Popular</span>' : '') +
+            '<h3 class="tier-name">' + escapeHtml(tier.name) + '</h3>' +
+            '<div class="tier-price"><span class="tier-price-amount">' + escapeHtml(tier.price) + '</span><span class="tier-price-period">' + escapeHtml(tier.period || '') + '</span></div>' +
+            '<ul class="tier-perks">' + perksHtml + '</ul>' +
+          '</article>'
+        );
+      }).join('');
+    }
+
+    var testimonialEl = document.getElementById('testimonialGrid');
+    if(testimonialEl){
+      var testimonials = data.testimonials || [];
+      testimonialEl.innerHTML = testimonials.map(function(t){
+        return (
+          '<figure class="testimonial-card reveal">' +
+            '<blockquote>&ldquo;' + escapeHtml(t.quote) + '&rdquo;</blockquote>' +
+            '<figcaption>' + escapeHtml(t.name) + ', ' + escapeHtml(t.title) + ' &mdash; ' + escapeHtml(t.company) + '</figcaption>' +
+          '</figure>'
+        );
+      }).join('');
+    }
+  }
+
   /* ---------- Render: news from content/news.json ---------- */
   function renderNews(posts){
     var el = document.getElementById('newsList');
@@ -332,16 +401,18 @@
     });
   }
 
-  var CONTENT_PATHS = ['content/settings.json', 'content/fights.json', 'content/fighters.json', 'content/news.json'];
+  var CONTENT_PATHS = ['content/settings.json', 'content/fights.json', 'content/fighters.json', 'content/news.json', 'content/sponsorship.json'];
 
   Promise.all(CONTENT_PATHS.map(fetchJson)).then(function(results){
     var settings = results[0];
     var fightsData = results[1];
     var fightersData = results[2];
     var newsData = results[3];
+    var sponsorshipData = results[4];
 
     setupDemoBanner(CONTENT_PATHS.some(function(p){ return !!getDemoOverride(p); }));
     renderSettings(settings);
+    renderSponsorship(sponsorshipData);
     var fightsResult = renderFights(fightsData.fights || []);
     renderRoster(fightersData.fighters || []);
     renderNews(newsData.posts || []);

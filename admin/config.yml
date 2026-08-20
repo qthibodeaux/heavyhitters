@@ -34,6 +34,55 @@ collections:
               - { label: "Email", name: "email", widget: "string" }
               - { label: "Office", name: "office", widget: "string" }
 
+  - name: "sponsorship"
+    label: "Sponsorship"
+    files:
+      - file: "content/sponsorship.json"
+        label: "Sponsorship Pitch & Packages"
+        name: "sponsorship"
+        fields:
+          - label: "Pitch"
+            name: "pitch"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Audience Stats"
+            name: "stats"
+            widget: "list"
+            summary: "{{value}} — {{label}}"
+            hint: "Keep these round/illustrative until real audience numbers are available."
+            fields:
+              - { label: "Value", name: "value", widget: "string", hint: "e.g. 5,000+" }
+              - { label: "Label", name: "label", widget: "string", hint: "e.g. Fans Per Event" }
+          - label: "Sponsorship Opportunities"
+            name: "offerings"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string", hint: "e.g. Ring Banner, Fighter Walkout" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Sponsorship Tiers"
+            name: "tiers"
+            widget: "list"
+            summary: "{{name}} — {{price}}"
+            fields:
+              - { label: "Tier Name", name: "name", widget: "string", hint: "e.g. Bronze, Silver, Gold, Title Sponsor" }
+              - { label: "Price", name: "price", widget: "string", hint: "e.g. $2,500" }
+              - { label: "Period", name: "period", widget: "string", hint: "e.g. per event", required: false }
+              - { label: "Highlight this tier", name: "featured", widget: "boolean", default: false, hint: "Shows a \"Most Popular\" badge and highlighted border" }
+              - { label: "Perks", name: "perks", widget: "list", field: { label: "Perk", name: "perk", widget: "string" } }
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            summary: "{{name}} — {{company}}"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Title", name: "title", widget: "string", hint: "e.g. Marketing Director" }
+              - { label: "Company", name: "company", widget: "string" }
+
   - name: "fights"
     label: "Fights"
     files:

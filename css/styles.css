@@ -347,6 +347,134 @@ section{ padding: 110px 0; }
 }
 
 /* ==========================================================================
+   SPONSORSHIP
+   ========================================================================== */
+.sponsorship .section-sub{ max-width: 680px; }
+
+.sponsor-subhead{
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--color-text-muted);
+  margin: 56px 0 8px;
+}
+
+.stat-strip{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+  padding: 32px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.stat-tile{ display: flex; flex-direction: column; align-items: center; text-align: center; }
+.stat-tile-value{
+  font-family: var(--font-heading);
+  font-size: 40px;
+  color: var(--color-primary);
+  line-height: 1;
+}
+.stat-tile-label{
+  margin-top: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--color-text-muted);
+}
+
+.offerings-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.offering-card{
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: 24px;
+}
+.offering-title{ font-size: 17px; margin-bottom: 10px; }
+.offering-desc{ font-size: 14px; color: var(--color-text-muted); margin: 0; }
+
+.testimonial-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+.testimonial-card{
+  margin: 0;
+  padding: 28px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+}
+.testimonial-card blockquote{
+  margin: 0 0 16px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+.testimonial-card figcaption{
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.tier-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.tier-card{
+  position: relative;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.tier-card--featured{
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+}
+.tier-badge{
+  position: absolute;
+  top: -14px;
+  left: 24px;
+  margin: 0;
+}
+.tier-name{ font-size: 22px; margin-bottom: 16px; }
+.tier-price{ display: flex; align-items: baseline; gap: 8px; margin-bottom: 24px; }
+.tier-price-amount{
+  font-family: var(--font-heading);
+  font-size: 34px;
+  color: var(--color-primary);
+  line-height: 1;
+}
+.tier-price-period{ font-size: 13px; color: var(--color-text-muted); }
+.tier-perks{ display: flex; flex-direction: column; gap: 12px; }
+.tier-perks li{
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+.tier-perks li::before{
+  content: '';
+  position: absolute;
+  left: 0; top: 7px;
+  width: 8px; height: 8px;
+  background: var(--color-primary);
+}
+
+.sponsor-cta{ text-align: center; margin-top: 48px; }
+
+/* ==========================================================================
    SCHEDULE / FIGHT CARDS
    ========================================================================== */
 .schedule{ background: var(--color-bg-alt); }
@@ -931,6 +1059,10 @@ section{ padding: 110px 0; }
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 980px){
+  .stat-strip{ grid-template-columns: repeat(2, 1fr); row-gap: 32px; }
+  .offerings-grid{ grid-template-columns: repeat(2, 1fr); }
+  .tier-grid{ grid-template-columns: repeat(2, 1fr); }
+  .testimonial-grid{ grid-template-columns: 1fr; }
   .events-grid{ grid-template-columns: repeat(2, 1fr); }
   .contact-grid{ grid-template-columns: 1fr; }
   .footer-inner{ grid-template-columns: 1fr 1fr; }
@@ -961,12 +1093,15 @@ section{ padding: 110px 0; }
     overflow: hidden;
     transition: max-height .3s ease;
   }
-  .main-nav.open{ max-height: 320px; }
+  .main-nav.open{ max-height: 420px; }
   .main-nav a{ padding: 16px 24px; border-bottom: 1px solid var(--color-border); }
   .main-nav a.btn{ margin: 16px 24px; }
   .nav-toggle{ display: flex; }
 
   section{ padding: 72px 0; }
+  .stat-strip{ grid-template-columns: 1fr 1fr; }
+  .offerings-grid{ grid-template-columns: 1fr; }
+  .tier-grid{ grid-template-columns: 1fr; }
   .countdown-unit{ min-width: 68px; padding: 12px 6px; }
   .countdown-num{ font-size: 26px; }
   .events-grid{ grid-template-columns: 1fr; }
