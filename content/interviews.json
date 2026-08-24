@@ -1,0 +1,19 @@
+{
+  "interviews": [
+    {
+      "label": "Organization",
+      "quote": "Hear from Heavy Hitters Promotions leadership on the vision behind Fighting For A Cause.",
+      "media": { "image": "", "youtubeUrl": "", "videoFile": "", "caption": "" }
+    },
+    {
+      "label": "Fighters",
+      "quote": "Fighters on the card share what stepping into the ring for a cause means to them.",
+      "media": { "image": "", "youtubeUrl": "", "videoFile": "", "caption": "" }
+    },
+    {
+      "label": "Community & Charity",
+      "quote": "A look at the community impact and charitable work behind every Fighting For A Cause event.",
+      "media": { "image": "", "youtubeUrl": "", "videoFile": "", "caption": "" }
+    }
+  ]
+}

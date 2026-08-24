@@ -3,6 +3,10 @@
 
   var SILHOUETTE_SVG = '<svg class="silhouette-icon" viewBox="0 0 64 76" fill="currentColor" aria-hidden="true"><circle cx="32" cy="12" r="8.5"/><path d="M20 24c0-3 5-4.5 12-4.5s12 1.5 12 4.5l3 17c1 4-6 7-15 7s-16-3-15-7z"/><circle cx="16" cy="28" r="6.5"/><path d="M22 26 13 23 10 29 18 33Z"/><circle cx="48" cy="28" r="6.5"/><path d="M42 26 51 23 54 29 46 33Z"/><path d="M23 42l-6 24h8l5-20z"/><path d="M41 42l6 24h-8l-5-20z"/></svg>';
 
+  /* Generic placeholder icons for media slots without an org/community equivalent to the fighter silhouette above. */
+  var ORG_SVG = '<svg class="silhouette-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><rect x="10" y="26" width="44" height="30" rx="2"/><path d="M32 6 8 22h48z"/><rect x="20" y="34" width="6" height="8" fill="#101010"/><rect x="29" y="34" width="6" height="8" fill="#101010"/><rect x="38" y="34" width="6" height="8" fill="#101010"/><rect x="20" y="46" width="6" height="8" fill="#101010"/><rect x="29" y="46" width="6" height="8" fill="#101010"/><rect x="38" y="46" width="6" height="8" fill="#101010"/></svg>';
+  var COMMUNITY_SVG = '<svg class="silhouette-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><circle cx="18" cy="20" r="8"/><circle cx="46" cy="20" r="8"/><path d="M4 52c0-10 7-16 14-16s14 6 14 16z"/><path d="M32 52c0-10 7-16 14-16s14 6 14 16z"/></svg>';
+
   function escapeHtml(str){
     return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
       return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
@@ -14,6 +18,39 @@
       return '<img src="' + escapeHtml(photoUrl) + '" alt="' + escapeHtml(altText) + '" style="width:100%;height:100%;object-fit:cover;">';
     }
     return SILHOUETTE_SVG;
+  }
+
+  /* ---------- Media slot resolver ----------
+     Renders whichever of videoFile / youtubeUrl / image is present on a
+     Decap "Media" object (fields always exist; whichever one is filled in
+     wins, checked in that priority order), or a designed pending-state
+     placeholder when none are. Reused by Mission, About, and Interviews. */
+  function getYouTubeId(url){
+    if(!url) return '';
+    var m = String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : '';
+  }
+
+  function renderMediaSlot(el, media, placeholderSvg, altText){
+    if(!el) return;
+    media = media || {};
+    var alt = escapeHtml(altText || '');
+    var hasMedia = true;
+    var inner;
+    if(media.videoFile){
+      inner = '<video src="' + escapeHtml(media.videoFile) + '" controls playsinline preload="metadata"></video>';
+    } else if(media.youtubeUrl && getYouTubeId(media.youtubeUrl)){
+      inner = '<iframe src="https://www.youtube.com/embed/' + getYouTubeId(media.youtubeUrl) + '" title="' + alt + '" allowfullscreen loading="lazy"></iframe>';
+    } else if(media.image){
+      inner = '<img src="' + escapeHtml(media.image) + '" alt="' + alt + '">';
+    } else {
+      hasMedia = false;
+      inner = '<div class="media-slot-placeholder">' + placeholderSvg + '<span class="media-pending-chip">Media Pending</span></div>';
+    }
+    if(hasMedia && media.caption){
+      inner += '<span class="media-slot-caption">' + escapeHtml(media.caption) + '</span>';
+    }
+    el.innerHTML = inner;
   }
 
   /* ---------- Sticky header shadow ---------- */
@@ -265,6 +302,86 @@
     }).join('');
   }
 
+  /* ---------- Render: mission from content/mission.json ---------- */
+  function renderMission(data){
+    data = data || {};
+    var beneficiary = data.beneficiary || {};
+    var eyebrowEl = document.getElementById('missionEyebrow');
+    var headingEl = document.getElementById('missionHeading');
+    var bodyEl = document.getElementById('missionBody');
+    if(eyebrowEl) eyebrowEl.textContent = data.eyebrow || '';
+    if(headingEl) headingEl.textContent = data.heading || '';
+    if(bodyEl) bodyEl.textContent = data.body || '';
+
+    var labelEl = document.getElementById('beneficiaryEventLabel');
+    var orgEl = document.getElementById('beneficiaryOrgName');
+    var descEl = document.getElementById('beneficiaryDescription');
+    var spokespersonEl = document.getElementById('beneficiarySpokesperson');
+    if(labelEl) labelEl.textContent = beneficiary.eventLabel || '';
+    if(orgEl) orgEl.textContent = beneficiary.orgName || '';
+    if(descEl) descEl.textContent = beneficiary.description || '';
+    if(spokespersonEl) spokespersonEl.textContent = beneficiary.spokesperson || '';
+
+    renderMediaSlot(document.getElementById('beneficiaryMedia'), beneficiary.media, ORG_SVG, beneficiary.orgName);
+  }
+
+  /* ---------- Render: about from content/about.json ---------- */
+  function renderAbout(data){
+    data = data || {};
+    var eyebrowEl = document.getElementById('aboutEyebrow');
+    var headingEl = document.getElementById('aboutHeading');
+    var bodyEl = document.getElementById('aboutBody');
+    if(eyebrowEl) eyebrowEl.textContent = data.eyebrow || '';
+    if(headingEl) headingEl.textContent = data.heading || '';
+    if(bodyEl) bodyEl.textContent = data.body || '';
+
+    renderMediaSlot(document.getElementById('aboutMedia'), data.media, ORG_SVG, data.heading);
+  }
+
+  /* ---------- Render: interviews from content/interviews.json ---------- */
+  function renderInterviews(list){
+    var el = document.getElementById('interviewGrid');
+    if(!el) return;
+    list = list || [];
+    el.innerHTML = list.map(function(item, i){
+      return (
+        '<article class="interview-card reveal">' +
+          '<div class="media-slot" id="interviewMedia' + i + '"></div>' +
+          '<div class="interview-card-body">' +
+            '<span class="interview-label">' + escapeHtml(item.label || '') + '</span>' +
+            '<p class="interview-quote">' + escapeHtml(item.quote || '') + '</p>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('');
+
+    list.forEach(function(item, i){
+      var label = (item.label || '').toLowerCase();
+      var placeholder = ORG_SVG;
+      if(label.indexOf('fight') > -1) placeholder = SILHOUETTE_SVG;
+      else if(label.indexOf('commun') > -1) placeholder = COMMUNITY_SVG;
+      renderMediaSlot(document.getElementById('interviewMedia' + i), item.media, placeholder, item.label);
+    });
+  }
+
+  /* ---------- Render: partner logos from content/partners.json ---------- */
+  function renderPartners(list){
+    var el = document.getElementById('partnerGrid');
+    if(!el) return;
+    list = list || [];
+    if(!list.length){
+      el.innerHTML = '<p class="empty-state reveal">Partner logos coming soon.</p>';
+      return;
+    }
+    el.innerHTML = list.map(function(p){
+      var inner = p.logo
+        ? '<img src="' + escapeHtml(p.logo) + '" alt="' + escapeHtml(p.name || '') + '">'
+        : '<span class="partner-tile-placeholder">' + escapeHtml(p.name || 'Partner') + '</span>';
+      if(p.link) inner = '<a href="' + escapeHtml(p.link) + '" target="_blank" rel="noopener">' + inner + '</a>';
+      return '<div class="partner-tile reveal">' + inner + '</div>';
+    }).join('');
+  }
+
   /* ---------- Render: sponsorship pitch, stats, offerings, tiers, testimonials from content/sponsorship.json ---------- */
   function renderSponsorship(data){
     var pitch = data.pitch || {};
@@ -301,23 +418,56 @@
       }).join('');
     }
 
-    var gridEl = document.getElementById('tierGrid');
-    if(gridEl){
-      var tiers = data.tiers || [];
-      gridEl.innerHTML = tiers.map(function(tier){
-        var featuredClass = tier.featured ? ' tier-card--featured' : '';
-        var perksHtml = (tier.perks || []).map(function(perk){
-          return '<li>' + escapeHtml(perk) + '</li>';
+    var categoriesEl = document.getElementById('packageCategories');
+    if(categoriesEl){
+      var packages = data.packages || [];
+      var categoryOrder = ['Ring & Event Branding', 'Core Sponsorship', 'VIP & Corporate Hospitality'];
+      var grouped = {};
+      packages.forEach(function(pkg){
+        var cat = pkg.category || 'Other';
+        (grouped[cat] = grouped[cat] || []).push(pkg);
+      });
+      var categories = categoryOrder.filter(function(c){ return grouped[c] && grouped[c].length; });
+      Object.keys(grouped).forEach(function(c){
+        if(categories.indexOf(c) === -1) categories.push(c);
+      });
+
+      categoriesEl.innerHTML = categories.map(function(cat){
+        var cards = grouped[cat].map(function(pkg){
+          var featuredClass = pkg.featured ? ' package-card--featured' : '';
+          var benefitsHtml = (pkg.benefits || []).map(function(b){
+            return '<li>' + escapeHtml(b) + '</li>';
+          }).join('');
+          return (
+            '<article class="package-card' + featuredClass + ' reveal">' +
+              (pkg.featured ? '<span class="status-chip status-chip--accent package-badge">Featured</span>' : '') +
+              '<h4 class="package-name">' + escapeHtml(pkg.name) + '</h4>' +
+              (pkg.availability ? '<span class="package-availability">' + escapeHtml(pkg.availability) + '</span>' : '') +
+              '<ul class="package-benefits">' + benefitsHtml + '</ul>' +
+              '<a href="#contact" class="package-inquire-link">Inquire &rarr;</a>' +
+            '</article>'
+          );
         }).join('');
         return (
-          '<article class="tier-card' + featuredClass + ' reveal">' +
-            (tier.featured ? '<span class="status-chip status-chip--accent tier-badge">Most Popular</span>' : '') +
-            '<h3 class="tier-name">' + escapeHtml(tier.name) + '</h3>' +
-            '<div class="tier-price"><span class="tier-price-amount">' + escapeHtml(tier.price) + '</span><span class="tier-price-period">' + escapeHtml(tier.period || '') + '</span></div>' +
-            '<ul class="tier-perks">' + perksHtml + '</ul>' +
-          '</article>'
+          '<div class="package-category reveal">' +
+            '<h3 class="package-category-title">' + escapeHtml(cat) + '</h3>' +
+            '<div class="package-grid">' + cards + '</div>' +
+          '</div>'
         );
       }).join('');
+    }
+
+    var customEl = document.getElementById('customPartnerships');
+    if(customEl){
+      var custom = data.customPartnerships || {};
+      var areasHtml = (custom.areas || []).map(function(area){
+        return '<span class="custom-area-pill">' + escapeHtml(area) + '</span>';
+      }).join('');
+      customEl.innerHTML =
+        '<h3>' + escapeHtml(custom.heading || '') + '</h3>' +
+        '<p>' + escapeHtml(custom.body || '') + '</p>' +
+        '<div class="custom-area-list">' + areasHtml + '</div>' +
+        '<a href="#contact" class="btn btn-outline">Discuss A Custom Partnership</a>';
     }
 
     var testimonialEl = document.getElementById('testimonialGrid');
@@ -401,7 +551,7 @@
     });
   }
 
-  var CONTENT_PATHS = ['content/settings.json', 'content/fights.json', 'content/fighters.json', 'content/news.json', 'content/sponsorship.json'];
+  var CONTENT_PATHS = ['content/settings.json', 'content/fights.json', 'content/fighters.json', 'content/news.json', 'content/sponsorship.json', 'content/mission.json', 'content/about.json', 'content/interviews.json', 'content/partners.json'];
 
   Promise.all(CONTENT_PATHS.map(fetchJson)).then(function(results){
     var settings = results[0];
@@ -409,10 +559,18 @@
     var fightersData = results[2];
     var newsData = results[3];
     var sponsorshipData = results[4];
+    var missionData = results[5];
+    var aboutData = results[6];
+    var interviewsData = results[7];
+    var partnersData = results[8];
 
     setupDemoBanner(CONTENT_PATHS.some(function(p){ return !!getDemoOverride(p); }));
     renderSettings(settings);
+    renderMission(missionData);
+    renderAbout(aboutData);
     renderSponsorship(sponsorshipData);
+    renderInterviews(interviewsData.interviews || []);
+    renderPartners(partnersData.partners || []);
     var fightsResult = renderFights(fightsData.fights || []);
     renderRoster(fightersData.fighters || []);
     renderNews(newsData.posts || []);

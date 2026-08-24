@@ -10,6 +10,94 @@ media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
 collections:
+  - name: "mission"
+    label: "Fighting For A Cause"
+    files:
+      - file: "content/mission.json"
+        label: "Charity Mission & Beneficiary"
+        name: "mission"
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Body", name: "body", widget: "text" }
+          - label: "Current Event Beneficiary"
+            name: "beneficiary"
+            widget: "object"
+            fields:
+              - { label: "Event Label", name: "eventLabel", widget: "string", hint: "e.g. January 30, 2027 Beneficiary" }
+              - { label: "Organization Name", name: "orgName", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Spokesperson / Leadership Line", name: "spokesperson", widget: "string", required: false }
+              - label: "Media"
+                name: "media"
+                widget: "object"
+                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank to show a placeholder."
+                fields:
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false, hint: "Paste a full YouTube URL" }
+                  - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
+                  - { label: "Caption", name: "caption", widget: "string", required: false }
+
+  - name: "about"
+    label: "About / Self-Introduction"
+    files:
+      - file: "content/about.json"
+        label: "About Heavy Hitters"
+        name: "about"
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Body", name: "body", widget: "text" }
+          - label: "Media"
+            name: "media"
+            widget: "object"
+            hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank to show a placeholder."
+            fields:
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
+              - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
+              - { label: "Caption", name: "caption", widget: "string", required: false }
+
+  - name: "interviews"
+    label: "Interviews"
+    files:
+      - file: "content/interviews.json"
+        label: "Interview Spotlights"
+        name: "interviews"
+        fields:
+          - label: "Interviews"
+            name: "interviews"
+            widget: "list"
+            summary: "{{label}}"
+            fields:
+              - { label: "Label", name: "label", widget: "string", hint: "e.g. Organization, Fighters, Community & Charity" }
+              - { label: "Pull Quote / Description", name: "quote", widget: "text" }
+              - label: "Media"
+                name: "media"
+                widget: "object"
+                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank to show a placeholder."
+                fields:
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
+                  - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
+                  - { label: "Caption", name: "caption", widget: "string", required: false }
+
+  - name: "partners"
+    label: "Partner Logos"
+    files:
+      - file: "content/partners.json"
+        label: "Partner / Sponsor Logos"
+        name: "partners"
+        fields:
+          - label: "Partners"
+            name: "partners"
+            widget: "list"
+            summary: "{{name}}"
+            fields:
+              - { label: "Company Name", name: "name", widget: "string" }
+              - { label: "Logo", name: "logo", widget: "image", required: false, hint: "Leave blank to show a placeholder tile" }
+              - { label: "Link", name: "link", widget: "string", required: false }
+
   - name: "settings"
     label: "Site Settings"
     files:
@@ -63,16 +151,28 @@ collections:
             fields:
               - { label: "Title", name: "title", widget: "string", hint: "e.g. Ring Banner, Fighter Walkout" }
               - { label: "Description", name: "description", widget: "text" }
-          - label: "Sponsorship Tiers"
-            name: "tiers"
+          - label: "Sponsorship Packages"
+            name: "packages"
             widget: "list"
-            summary: "{{name}} — {{price}}"
+            summary: "{{category}} — {{name}}"
+            hint: "No pricing is shown on the site — availability counts create urgency instead. Add as many packages as needed; group them by Category."
             fields:
-              - { label: "Tier Name", name: "name", widget: "string", hint: "e.g. Bronze, Silver, Gold, Title Sponsor" }
-              - { label: "Price", name: "price", widget: "string", hint: "e.g. $2,500" }
-              - { label: "Period", name: "period", widget: "string", hint: "e.g. per event", required: false }
-              - { label: "Highlight this tier", name: "featured", widget: "boolean", default: false, hint: "Shows a \"Most Popular\" badge and highlighted border" }
-              - { label: "Perks", name: "perks", widget: "list", field: { label: "Perk", name: "perk", widget: "string" } }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["Ring & Event Branding", "Core Sponsorship", "VIP & Corporate Hospitality"]
+              - { label: "Package Name", name: "name", widget: "string", hint: "e.g. Center Canvas Logo" }
+              - { label: "Availability", name: "availability", widget: "string", hint: "e.g. \"1 available\" or \"4 available\" — no dollar amounts" }
+              - { label: "Highlight this package", name: "featured", widget: "boolean", default: false, hint: "Shows a featured badge and highlighted border" }
+              - { label: "Benefits", name: "benefits", widget: "list", field: { label: "Benefit", name: "benefit", widget: "string" } }
+          - label: "Custom Partnerships"
+            name: "customPartnerships"
+            widget: "object"
+            hint: "The open-ended, no-pricing-published category — apparel, media, hospitality, etc."
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Areas", name: "areas", widget: "list", field: { label: "Area", name: "area", widget: "string" } }
           - label: "Testimonials"
             name: "testimonials"
             widget: "list"
