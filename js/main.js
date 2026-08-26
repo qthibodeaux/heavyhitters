@@ -207,6 +207,24 @@
     if(officeEl) officeEl.textContent = contact.office || '';
   }
 
+  /* ---------- Section visibility (from content/settings.json "sections") ----------
+     Lets the client hide/show whole sections from Decap without any code
+     changes — nothing is deleted, the section's content stays saved and
+     just stops rendering on the page. Also hides any nav/footer link
+     pointing at a hidden section so there's nothing dead to click. */
+  function applySectionVisibility(sections){
+    sections = sections || {};
+    Object.keys(sections).forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.classList.toggle('is-hidden', sections[id] === false);
+    });
+    document.querySelectorAll('.main-nav a[href^="#"], .footer-links a[href^="#"]').forEach(function(link){
+      var id = link.getAttribute('href').slice(1);
+      var hidden = Object.prototype.hasOwnProperty.call(sections, id) && sections[id] === false;
+      link.classList.toggle('is-hidden', hidden);
+    });
+  }
+
   /* ---------- Render: fights (schedule + past results) from content/fights.json ---------- */
   function renderFights(fights){
     var fightListEl = document.getElementById('fightList');
@@ -579,6 +597,7 @@
 
     setupDemoBanner(CONTENT_PATHS.some(function(p){ return !!getDemoOverride(p); }));
     renderSettings(settings);
+    applySectionVisibility(settings.sections);
     renderMission(missionData);
     renderAbout(aboutData);
     renderSponsorship(sponsorshipData);

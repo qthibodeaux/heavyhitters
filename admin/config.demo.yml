@@ -123,6 +123,22 @@ collections:
               - { label: "Sponsorships & Sales Email", name: "salesEmail", widget: "string" }
               - { label: "Event & Partnership Inquiries Email", name: "partnershipsEmail", widget: "string" }
               - { label: "Office", name: "office", widget: "string" }
+          - label: "Section Visibility"
+            name: "sections"
+            widget: "object"
+            hint: "Uncheck a section to hide it from the live site. Nothing is deleted — its content stays saved and comes right back the moment you re-check it."
+            fields:
+              - { label: "Fighting For A Cause / Mission", name: "mission", widget: "boolean", default: true }
+              - { label: "About / Self-Introduction", name: "about", widget: "boolean", default: true }
+              - { label: "Sponsorship Pitch, Audience & Content Offerings", name: "sponsorship", widget: "boolean", default: true }
+              - { label: "Interviews", name: "interviews", widget: "boolean", default: true }
+              - { label: "Social Proof / Testimonials", name: "social-proof", widget: "boolean", default: true }
+              - { label: "Partner Logos", name: "partners", widget: "boolean", default: true }
+              - { label: "Sponsorship Packages", name: "packages", widget: "boolean", default: true }
+              - { label: "Upcoming Fights / Schedule", name: "schedule", widget: "boolean", default: true }
+              - { label: "Past Results", name: "results", widget: "boolean", default: true }
+              - { label: "Fighter Roster / The Team", name: "roster", widget: "boolean", default: true }
+              - { label: "News", name: "news", widget: "boolean", default: true }
 
   - name: "sponsorship"
     label: "Sponsorship"

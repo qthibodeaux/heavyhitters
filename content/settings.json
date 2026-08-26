@@ -13,5 +13,18 @@
     "salesEmail": "heavyhitterspromotionsllc@gmail.com",
     "partnershipsEmail": "heavyhitterscombatsports@gmail.com",
     "office": "Houston, TX"
+  },
+  "sections": {
+    "mission": true,
+    "about": true,
+    "sponsorship": true,
+    "interviews": true,
+    "social-proof": true,
+    "partners": true,
+    "packages": true,
+    "schedule": false,
+    "results": false,
+    "roster": false,
+    "news": false
   }
 }
