@@ -112,13 +112,16 @@ collections:
               - { label: "Title — Line 1", name: "titleLine1", widget: "string" }
               - { label: "Title — Line 2", name: "titleLine2", widget: "string" }
               - { label: "Subheading", name: "subhead", widget: "text" }
-              - { label: "Background Image", name: "image", widget: "image" }
+              - { label: "Background Image (fallback / poster)", name: "image", widget: "image", hint: "Always shown as the poster frame, and used if no video is set." }
+              - { label: "Background Video (uploaded file)", name: "videoFile", widget: "file", required: false, hint: "Takes priority over the YouTube link and the image. Keep it short and muted-friendly — it autoplays on loop with no sound." }
+              - { label: "Background Video (YouTube link)", name: "youtubeUrl", widget: "string", required: false, hint: "Used only if no uploaded video file is set above." }
           - label: "Contact"
             name: "contact"
             widget: "object"
             fields:
               - { label: "Phone", name: "phone", widget: "string" }
-              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Sponsorships & Sales Email", name: "salesEmail", widget: "string" }
+              - { label: "Event & Partnership Inquiries Email", name: "partnershipsEmail", widget: "string" }
               - { label: "Office", name: "office", widget: "string" }
 
   - name: "sponsorship"

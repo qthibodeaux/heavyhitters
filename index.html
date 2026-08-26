@@ -29,7 +29,6 @@
     <nav class="main-nav" id="mainNav">
       <a href="#mission">Our Cause</a>
       <a href="#packages">Packages</a>
-      <a href="#roster">Fighters</a>
       <a href="#schedule">Schedule</a>
       <a href="#contact">Contact</a>
       <a href="#contact" class="btn btn-primary btn-sm">Become a Sponsor</a>
@@ -43,9 +42,7 @@
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="hero">
-  <div class="hero-media" aria-hidden="true">
-    <img class="hero-media-img" id="heroImg" src="img/hero-ring.png" alt="">
-  </div>
+  <div class="hero-media" id="heroMedia" aria-hidden="true"></div>
   <div class="hero-overlay"></div>
 
   <div class="container hero-content">
@@ -162,8 +159,8 @@
   </div>
 </section>
 
-<!-- ================= PAST RESULTS ================= -->
-<section class="past-events" id="results">
+<!-- ================= PAST RESULTS (hidden — client request, easy to re-enable) ================= -->
+<section class="past-events is-hidden" id="results">
   <div class="container">
     <p class="section-eyebrow reveal">The Archive</p>
     <h2 class="section-title reveal">Past Results</h2>
@@ -188,8 +185,8 @@
   </div>
 </div>
 
-<!-- ================= ROSTER ================= -->
-<section class="roster" id="roster">
+<!-- ================= ROSTER (hidden — client request, easy to re-enable) ================= -->
+<section class="roster is-hidden" id="roster">
   <div class="container">
     <p class="section-eyebrow reveal">The Team</p>
     <h2 class="section-title reveal">The Roster</h2>
@@ -219,7 +216,8 @@
       <p class="section-sub">Ticket questions, sponsorships, press inquiries &mdash; reach out and our team will get back to you within 1&ndash;2 business days.</p>
       <ul class="contact-info">
         <li><strong>Phone</strong><span id="contactPhone"></span></li>
-        <li><strong>Email</strong><span id="contactEmail"></span></li>
+        <li><strong>Sponsorships &amp; Sales</strong><span id="contactSalesEmail"></span></li>
+        <li><strong>Event &amp; Partnership Inquiries</strong><span id="contactPartnershipsEmail"></span></li>
         <li><strong>Office</strong><span id="contactOffice"></span></li>
       </ul>
     </div>
@@ -273,7 +271,6 @@
       <h4>Explore</h4>
       <a href="#mission">Our Cause</a>
       <a href="#packages">Packages</a>
-      <a href="#roster">Fighters</a>
       <a href="#schedule">Schedule</a>
       <a href="#news">News</a>
       <a href="#contact">Contact</a>

@@ -4,11 +4,14 @@
     "titleLine1": "YOUR BRAND",
     "titleLine2": "IN THE RING",
     "subhead": "Heavy Hitters Promotions brings championship boxing to Houston and beyond. We partner with brands who want to stand where the energy is — ringside, on fight night, in front of a fanbase that shows up.",
-    "image": "img/hero-ring.png"
+    "image": "img/hero-ring.png",
+    "videoFile": "",
+    "youtubeUrl": ""
   },
   "contact": {
     "phone": "(713) 555-0142",
-    "email": "info@heavyhitterspromotions.com",
+    "salesEmail": "heavyhitterspromotionsllc@gmail.com",
+    "partnershipsEmail": "heavyhitterscombatsports@gmail.com",
     "office": "Houston, TX"
   }
 }

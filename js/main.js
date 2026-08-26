@@ -180,17 +180,30 @@
     var eyebrowEl = document.getElementById('heroEyebrow');
     var titleEl = document.getElementById('heroTitle');
     var subEl = document.getElementById('heroSub');
-    var imgEl = document.getElementById('heroImg');
     if(eyebrowEl) eyebrowEl.textContent = hero.eyebrow || '';
     if(titleEl) titleEl.innerHTML = escapeHtml(hero.titleLine1 || '') + '<br>' + escapeHtml(hero.titleLine2 || '');
     if(subEl) subEl.textContent = hero.subhead || '';
-    if(imgEl && hero.image) imgEl.src = hero.image;
+
+    var heroMediaEl = document.getElementById('heroMedia');
+    if(heroMediaEl){
+      var heroInner;
+      if(hero.videoFile){
+        heroInner = '<video src="' + escapeHtml(hero.videoFile) + '" autoplay muted loop playsinline' + (hero.image ? ' poster="' + escapeHtml(hero.image) + '"' : '') + '></video>';
+      } else if(hero.youtubeUrl && getYouTubeId(hero.youtubeUrl)){
+        heroInner = '<iframe src="https://www.youtube.com/embed/' + getYouTubeId(hero.youtubeUrl) + '?autoplay=1&mute=1&loop=1&playlist=' + getYouTubeId(hero.youtubeUrl) + '&controls=0&showinfo=0&modestbranding=1&rel=0" title="" allow="autoplay" tabindex="-1"></iframe>';
+      } else {
+        heroInner = '<img src="' + escapeHtml(hero.image || 'img/hero-ring.png') + '" alt="">';
+      }
+      heroMediaEl.innerHTML = heroInner;
+    }
 
     var phoneEl = document.getElementById('contactPhone');
-    var emailEl = document.getElementById('contactEmail');
+    var salesEmailEl = document.getElementById('contactSalesEmail');
+    var partnershipsEmailEl = document.getElementById('contactPartnershipsEmail');
     var officeEl = document.getElementById('contactOffice');
     if(phoneEl) phoneEl.textContent = contact.phone || '';
-    if(emailEl) emailEl.textContent = contact.email || '';
+    if(salesEmailEl) salesEmailEl.textContent = contact.salesEmail || '';
+    if(partnershipsEmailEl) partnershipsEmailEl.textContent = contact.partnershipsEmail || '';
     if(officeEl) officeEl.textContent = contact.office || '';
   }
 
