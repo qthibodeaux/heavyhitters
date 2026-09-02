@@ -246,6 +246,16 @@ collections:
                   - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Leave blank to show a placeholder silhouette" }
               - { label: "Result (completed only)", name: "result", widget: "string", required: false, hint: "Short one-liner, e.g. Bradley def. Kane · TKO Round 7" }
               - { label: "Recap (completed only)", name: "recap", widget: "text", required: false, hint: "Longer paragraph shown when a visitor clicks the result card" }
+              - label: "Recap Media (completed only)"
+                name: "media"
+                widget: "object"
+                required: false
+                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video, shown in the result popup. Leave all blank to show a placeholder."
+                fields:
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
+                  - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
+                  - { label: "Caption", name: "caption", widget: "string", required: false }
 
   - name: "fighters"
     label: "Fighters"

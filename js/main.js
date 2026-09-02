@@ -130,6 +130,7 @@
   /* ---------- Past results modal (call after event-cards are rendered) ---------- */
   function setupModal(eventData){
     var modal = document.getElementById('eventModal');
+    var modalMedia = document.getElementById('modalMedia');
     var modalDate = document.getElementById('modalDate');
     var modalTitle = document.getElementById('modalTitle');
     var modalResult = document.getElementById('modalResult');
@@ -143,6 +144,7 @@
       modalTitle.textContent = data.title;
       modalResult.textContent = data.result;
       modalDesc.textContent = data.desc;
+      renderMediaSlot(modalMedia, data.media, SILHOUETTE_SVG, data.title);
       lastFocused = document.activeElement;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
@@ -291,7 +293,8 @@
         date: fight.dateLabel,
         title: fight.title,
         result: fight.result || '',
-        desc: fight.recap || ''
+        desc: fight.recap || '',
+        media: fight.media
       };
       return (
         '<button class="event-card reveal" data-event="' + id + '">' +
