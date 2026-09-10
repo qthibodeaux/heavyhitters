@@ -3,9 +3,12 @@
 
   var SILHOUETTE_SVG = '<svg class="silhouette-icon" viewBox="0 0 64 76" fill="currentColor" aria-hidden="true"><circle cx="32" cy="12" r="8.5"/><path d="M20 24c0-3 5-4.5 12-4.5s12 1.5 12 4.5l3 17c1 4-6 7-15 7s-16-3-15-7z"/><circle cx="16" cy="28" r="6.5"/><path d="M22 26 13 23 10 29 18 33Z"/><circle cx="48" cy="28" r="6.5"/><path d="M42 26 51 23 54 29 46 33Z"/><path d="M23 42l-6 24h8l5-20z"/><path d="M41 42l6 24h-8l-5-20z"/></svg>';
 
-  /* Generic placeholder icons for media slots without an org/community equivalent to the fighter silhouette above. */
-  var ORG_SVG = '<svg class="silhouette-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><rect x="10" y="26" width="44" height="30" rx="2"/><path d="M32 6 8 22h48z"/><rect x="20" y="34" width="6" height="8" fill="#101010"/><rect x="29" y="34" width="6" height="8" fill="#101010"/><rect x="38" y="34" width="6" height="8" fill="#101010"/><rect x="20" y="46" width="6" height="8" fill="#101010"/><rect x="29" y="46" width="6" height="8" fill="#101010"/><rect x="38" y="46" width="6" height="8" fill="#101010"/></svg>';
-  var COMMUNITY_SVG = '<svg class="silhouette-icon" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><circle cx="18" cy="20" r="8"/><circle cx="46" cy="20" r="8"/><path d="M4 52c0-10 7-16 14-16s14 6 14 16z"/><path d="M32 52c0-10 7-16 14-16s14 6 14 16z"/></svg>';
+  /* ---------- Content thresholds ----------
+     A section only earns its place once it has enough real content to look
+     deliberate. Below these counts the section hides itself — no manual
+     toggle needed, and it reappears on its own the moment the count is met. */
+  var MIN_PARTNERS = 3;
+  var MIN_TESTIMONIALS = 4;
 
   function escapeHtml(str){
     return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
@@ -22,35 +25,71 @@
 
   /* ---------- Media slot resolver ----------
      Renders whichever of videoFile / youtubeUrl / image is present on a
-     Decap "Media" object (fields always exist; whichever one is filled in
-     wins, checked in that priority order), or a designed pending-state
-     placeholder when none are. Reused by Mission, About, and Interviews. */
+     Decap "Media" object (whichever one is filled in wins, checked in that
+     priority order). When none are filled the slot COLLAPSES — it renders
+     nothing and hides itself, so a section with no media reads as a
+     deliberate text layout rather than a hole waiting to be filled.
+     Callers use the returned boolean to reflow their own layout. */
   function getYouTubeId(url){
     if(!url) return '';
     var m = String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
     return m ? m[1] : '';
   }
 
-  function renderMediaSlot(el, media, placeholderSvg, altText){
-    if(!el) return;
-    media = media || {};
-    var alt = escapeHtml(altText || '');
-    var hasMedia = true;
-    var inner;
-    if(media.videoFile){
-      inner = '<video src="' + escapeHtml(media.videoFile) + '" controls playsinline preload="metadata"></video>';
-    } else if(media.youtubeUrl && getYouTubeId(media.youtubeUrl)){
-      inner = '<iframe src="https://www.youtube.com/embed/' + getYouTubeId(media.youtubeUrl) + '" title="' + alt + '" allowfullscreen loading="lazy"></iframe>';
-    } else if(media.image){
-      inner = '<img src="' + escapeHtml(media.image) + '" alt="' + alt + '">';
-    } else {
-      hasMedia = false;
-      inner = '<div class="media-slot-placeholder">' + placeholderSvg + '<span class="media-pending-chip">Media Pending</span></div>';
+  /* Accepts "296", "4:56" or "1:04:56" and returns seconds (null if unset/invalid). */
+  function parseTimeToSeconds(value){
+    if(value == null || value === '') return null;
+    var parts = String(value).trim().split(':');
+    var seconds = 0;
+    for(var i = 0; i < parts.length; i++){
+      var part = parseInt(parts[i], 10);
+      if(isNaN(part) || part < 0) return null;
+      seconds = seconds * 60 + part;
     }
-    if(hasMedia && media.caption){
+    return seconds;
+  }
+
+  function hasMedia(media){
+    if(!media) return false;
+    return !!(media.videoFile || (media.youtubeUrl && getYouTubeId(media.youtubeUrl)) || media.image);
+  }
+
+  function renderMediaSlot(el, media, altText){
+    if(!el) return false;
+    media = media || {};
+
+    if(!hasMedia(media)){
+      el.innerHTML = '';
+      el.classList.add('is-hidden');
+      return false;
+    }
+
+    var alt = escapeHtml(altText || '');
+    var start = parseTimeToSeconds(media.startTime);
+    var end = parseTimeToSeconds(media.endTime);
+    var inner;
+
+    if(media.videoFile){
+      /* Media fragment lets a single uploaded file play just one segment. */
+      var fragment = start == null ? '' : '#t=' + start + (end == null ? '' : ',' + end);
+      inner = '<video src="' + escapeHtml(media.videoFile) + fragment + '" controls playsinline preload="metadata"></video>';
+    } else if(media.youtubeUrl){
+      var params = [];
+      if(start != null) params.push('start=' + start);
+      if(end != null) params.push('end=' + end);
+      var query = params.length ? '?' + params.join('&') : '';
+      inner = '<iframe src="https://www.youtube.com/embed/' + getYouTubeId(media.youtubeUrl) + query + '" title="' + alt + '" allowfullscreen loading="lazy"></iframe>';
+    } else {
+      inner = '<img src="' + escapeHtml(media.image) + '" alt="' + alt + '">';
+    }
+
+    if(media.caption){
       inner += '<span class="media-slot-caption">' + escapeHtml(media.caption) + '</span>';
     }
+
+    el.classList.remove('is-hidden');
     el.innerHTML = inner;
+    return true;
   }
 
   /* ---------- Sticky header shadow ---------- */
@@ -144,7 +183,7 @@
       modalTitle.textContent = data.title;
       modalResult.textContent = data.result;
       modalDesc.textContent = data.desc;
-      renderMediaSlot(modalMedia, data.media, SILHOUETTE_SVG, data.title);
+      renderMediaSlot(modalMedia, data.media, data.title);
       lastFocused = document.activeElement;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
@@ -356,7 +395,7 @@
     if(descEl) descEl.textContent = beneficiary.description || '';
     if(spokespersonEl) spokespersonEl.textContent = beneficiary.spokesperson || '';
 
-    renderMediaSlot(document.getElementById('beneficiaryMedia'), beneficiary.media, ORG_SVG, beneficiary.orgName);
+    renderMediaSlot(document.getElementById('beneficiaryMedia'), beneficiary.media, beneficiary.orgName);
   }
 
   /* ---------- Render: about from content/about.json ---------- */
@@ -369,44 +408,71 @@
     if(headingEl) headingEl.textContent = data.heading || '';
     if(bodyEl) bodyEl.textContent = data.body || '';
 
-    renderMediaSlot(document.getElementById('aboutMedia'), data.media, ORG_SVG, data.heading);
+    /* No media = the two-column grid collapses to a single centered column,
+       so the section reads as intentional prose instead of a missing image. */
+    var aboutHasMedia = renderMediaSlot(document.getElementById('aboutMedia'), data.media, data.heading);
+    var aboutSection = document.getElementById('about');
+    if(aboutSection) aboutSection.classList.toggle('section--no-media', !aboutHasMedia);
   }
 
-  /* ---------- Render: interviews from content/interviews.json ---------- */
+  /* ---------- Render: interviews from content/interviews.json ----------
+     A variable-length clip list, not a fixed set of slots — however many
+     clips exist is what renders, and the grid sizes itself to the count.
+     Add a clip in Decap and it appears; remove one and nothing is left
+     behind. Whole section hides itself when the list is empty. */
   function renderInterviews(list){
     var el = document.getElementById('interviewGrid');
     if(!el) return;
     list = list || [];
+
+    var section = document.getElementById('interviews');
+    if(section) section.classList.toggle('is-hidden', list.length === 0);
+    if(!list.length){
+      el.innerHTML = '';
+      return;
+    }
+
+    el.setAttribute('data-count', String(list.length));
     el.innerHTML = list.map(function(item, i){
+      var slotHtml = hasMedia(item.media)
+        ? '<div class="media-slot" id="interviewMedia' + i + '"></div>'
+        : '';
+      var speakerHtml = item.speaker
+        ? '<span class="interview-speaker">' + escapeHtml(item.speaker) + '</span>'
+        : '';
       return (
         '<article class="interview-card reveal">' +
-          '<div class="media-slot" id="interviewMedia' + i + '"></div>' +
+          slotHtml +
           '<div class="interview-card-body">' +
             '<span class="interview-label">' + escapeHtml(item.label || '') + '</span>' +
             '<p class="interview-quote">' + escapeHtml(item.quote || '') + '</p>' +
+            speakerHtml +
           '</div>' +
         '</article>'
       );
     }).join('');
 
     list.forEach(function(item, i){
-      var label = (item.label || '').toLowerCase();
-      var placeholder = ORG_SVG;
-      if(label.indexOf('fight') > -1) placeholder = SILHOUETTE_SVG;
-      else if(label.indexOf('commun') > -1) placeholder = COMMUNITY_SVG;
-      renderMediaSlot(document.getElementById('interviewMedia' + i), item.media, placeholder, item.label);
+      renderMediaSlot(document.getElementById('interviewMedia' + i), item.media, item.label);
     });
   }
 
-  /* ---------- Render: partner logos from content/partners.json ---------- */
+  /* ---------- Render: partner logos from content/partners.json ----------
+     A logo wall only sells credibility once it looks full, so the section
+     stays hidden until MIN_PARTNERS logos exist, then appears on its own. */
   function renderPartners(list){
     var el = document.getElementById('partnerGrid');
     if(!el) return;
     list = list || [];
-    if(!list.length){
-      el.innerHTML = '<p class="empty-state reveal">Partner logos coming soon.</p>';
+
+    var section = document.getElementById('partners');
+    if(section) section.classList.toggle('is-hidden', list.length < MIN_PARTNERS);
+    if(list.length < MIN_PARTNERS){
+      el.innerHTML = '';
       return;
     }
+
+    el.setAttribute('data-count', String(list.length));
     el.innerHTML = list.map(function(p){
       var inner = p.logo
         ? '<img src="' + escapeHtml(p.logo) + '" alt="' + escapeHtml(p.name || '') + '">'
@@ -504,17 +570,37 @@
         '<a href="#contact" class="btn btn-outline">Discuss A Custom Partnership</a>';
     }
 
+    /* Social proof needs enough quotes to read as a wall of endorsement —
+       below MIN_TESTIMONIALS the section hides rather than looking thin. */
     var testimonialEl = document.getElementById('testimonialGrid');
     if(testimonialEl){
       var testimonials = data.testimonials || [];
-      testimonialEl.innerHTML = testimonials.map(function(t){
-        return (
-          '<figure class="testimonial-card reveal">' +
-            '<blockquote>&ldquo;' + escapeHtml(t.quote) + '&rdquo;</blockquote>' +
-            '<figcaption>' + escapeHtml(t.name) + ', ' + escapeHtml(t.title) + ' &mdash; ' + escapeHtml(t.company) + '</figcaption>' +
-          '</figure>'
-        );
-      }).join('');
+      var proofSection = document.getElementById('social-proof');
+      if(proofSection) proofSection.classList.toggle('is-hidden', testimonials.length < MIN_TESTIMONIALS);
+      if(testimonials.length < MIN_TESTIMONIALS){
+        testimonialEl.innerHTML = '';
+      } else {
+        testimonialEl.setAttribute('data-count', String(testimonials.length));
+        testimonialEl.innerHTML = testimonials.map(function(t){
+          return (
+            '<figure class="testimonial-card reveal">' +
+              '<blockquote>&ldquo;' + escapeHtml(t.quote) + '&rdquo;</blockquote>' +
+              '<figcaption>' + escapeHtml(t.name) + ', ' + escapeHtml(t.title) + ' &mdash; ' + escapeHtml(t.company) + '</figcaption>' +
+            '</figure>'
+          );
+        }).join('');
+      }
+    }
+
+    /* Closing video above the sponsor CTA — collapses to just the button
+       when no clip is set, so the call to action never looks unfinished. */
+    var cta = data.cta || {};
+    var ctaHeadingEl = document.getElementById('ctaHeading');
+    var ctaMediaEl = document.getElementById('ctaMedia');
+    var ctaHasMedia = renderMediaSlot(ctaMediaEl, cta.media, cta.heading);
+    if(ctaHeadingEl){
+      ctaHeadingEl.textContent = ctaHasMedia ? (cta.heading || '') : '';
+      ctaHeadingEl.classList.toggle('is-hidden', !ctaHasMedia || !cta.heading);
     }
   }
 

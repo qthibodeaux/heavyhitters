@@ -5,10 +5,9 @@
     "body": "Heavy Hitters Promotions puts your brand in front of a passionate, growing fight community — from fight night energy to year-round digital reach. Whether you're looking for regional visibility or a marquee event partnership, we'll build a package that fits your goals."
   },
   "stats": [
-    { "value": "5,000+", "label": "Fans Per Event" },
-    { "value": "50K+", "label": "Combined Social Reach" },
-    { "value": "12", "label": "Events Per Year" },
-    { "value": "8", "label": "Fighters On Roster" }
+    { "value": "100M+", "label": "Combined Social Reach" },
+    { "value": "75M+", "label": "Kujo Content Views" },
+    { "value": "6", "label": "Events Per Year" }
   ],
   "offerings": [
     {
@@ -124,18 +123,16 @@
       "Other Customized Event Integrations"
     ]
   },
-  "testimonials": [
-    {
-      "quote": "Partnering with Heavy Hitters put our brand in front of exactly the audience we wanted — energetic, engaged, and still talking about us long after the final bell.",
-      "name": "J. Ramirez",
-      "title": "Marketing Director",
-      "company": "Lonestar Auto Group"
-    },
-    {
-      "quote": "The turnout and energy at fight night gave us more brand exposure than a full quarter of traditional advertising.",
-      "name": "S. Okafor",
-      "title": "Owner",
-      "company": "Bayou City Brewing Co."
+  "testimonials": [],
+  "cta": {
+    "heading": "Why This One Matters",
+    "media": {
+      "image": "",
+      "youtubeUrl": "https://youtu.be/IKYqOyZ6UWA",
+      "videoFile": "",
+      "caption": "",
+      "startTime": "45:50",
+      "endTime": "47:17"
     }
-  ]
+  }
 }

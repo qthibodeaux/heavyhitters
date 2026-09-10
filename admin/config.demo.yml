@@ -30,12 +30,14 @@ collections:
               - label: "Media"
                 name: "media"
                 widget: "object"
-                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank to show a placeholder."
+                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank and this media area disappears cleanly — the section reflows, nothing looks missing."
                 fields:
                   - { label: "Image", name: "image", widget: "image", required: false }
                   - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false, hint: "Paste a full YouTube URL" }
                   - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
                   - { label: "Caption", name: "caption", widget: "string", required: false }
+                  - { label: "Start Time", name: "startTime", widget: "string", required: false, hint: "Optional — play only part of the video. Use M:SS (e.g. 4:56). Leave blank to start from the beginning." }
+                  - { label: "End Time", name: "endTime", widget: "string", required: false, hint: "Optional — e.g. 5:34. Leave blank to play to the end." }
 
   - name: "about"
     label: "About / Self-Introduction"
@@ -50,12 +52,14 @@ collections:
           - label: "Media"
             name: "media"
             widget: "object"
-            hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank to show a placeholder."
+            hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank and this media area disappears cleanly — the section reflows to centered text, nothing looks missing."
             fields:
               - { label: "Image", name: "image", widget: "image", required: false }
               - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
               - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
               - { label: "Caption", name: "caption", widget: "string", required: false }
+              - { label: "Start Time", name: "startTime", widget: "string", required: false, hint: "Optional — play only part of the video. Use M:SS (e.g. 4:56)." }
+              - { label: "End Time", name: "endTime", widget: "string", required: false, hint: "Optional — e.g. 5:34. Leave blank to play to the end." }
 
   - name: "interviews"
     label: "Interviews"
@@ -64,22 +68,26 @@ collections:
         label: "Interview Spotlights"
         name: "interviews"
         fields:
-          - label: "Interviews"
+          - label: "Interview Clips"
             name: "interviews"
             widget: "list"
-            summary: "{{label}}"
+            summary: "{{label}} — {{speaker}}"
+            hint: "Add as many clips as you have — the layout sizes itself to the count, and the whole section hides if the list is empty. To pull several clips from one long interview, add an entry per clip using the same video link with different Start/End times."
             fields:
-              - { label: "Label", name: "label", widget: "string", hint: "e.g. Organization, Fighters, Community & Charity" }
+              - { label: "Label", name: "label", widget: "string", hint: "The topic, e.g. Organization, Community & Charity" }
+              - { label: "Speaker", name: "speaker", widget: "string", required: false, hint: "Who's talking — shown as attribution under the text" }
               - { label: "Pull Quote / Description", name: "quote", widget: "text" }
               - label: "Media"
                 name: "media"
                 widget: "object"
-                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank to show a placeholder."
+                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video. Leave all blank and the card shows text only."
                 fields:
                   - { label: "Image", name: "image", widget: "image", required: false }
                   - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
                   - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
                   - { label: "Caption", name: "caption", widget: "string", required: false }
+                  - { label: "Start Time", name: "startTime", widget: "string", required: false, hint: "Optional — play only part of the video. Use M:SS (e.g. 9:55)." }
+                  - { label: "End Time", name: "endTime", widget: "string", required: false, hint: "Optional — e.g. 10:35. Leave blank to play to the end." }
 
   - name: "partners"
     label: "Partner Logos"
@@ -92,6 +100,7 @@ collections:
             name: "partners"
             widget: "list"
             summary: "{{name}}"
+            hint: "The Partners section stays hidden until there are at least 3 logos — a half-empty logo wall undersells you. Add the third and it appears on the live site automatically."
             fields:
               - { label: "Company Name", name: "name", widget: "string" }
               - { label: "Logo", name: "logo", widget: "image", required: false, hint: "Leave blank to show a placeholder tile" }
@@ -195,11 +204,28 @@ collections:
             name: "testimonials"
             widget: "list"
             summary: "{{name}} — {{company}}"
+            hint: "The What Sponsors Say section stays hidden until there are at least 4 quotes, so it never looks thin. Only use real, attributable quotes from actual sponsors."
             fields:
               - { label: "Quote", name: "quote", widget: "text" }
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Title", name: "title", widget: "string", hint: "e.g. Marketing Director" }
               - { label: "Company", name: "company", widget: "string" }
+          - label: "Closing Call-To-Action"
+            name: "cta"
+            widget: "object"
+            hint: "An optional video shown directly above the Become a Sponsor button. Leave the media blank and only the button shows."
+            fields:
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - label: "Media"
+                name: "media"
+                widget: "object"
+                fields:
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
+                  - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
+                  - { label: "Caption", name: "caption", widget: "string", required: false }
+                  - { label: "Start Time", name: "startTime", widget: "string", required: false, hint: "Optional — use M:SS (e.g. 45:50)." }
+                  - { label: "End Time", name: "endTime", widget: "string", required: false, hint: "Optional — e.g. 47:17." }
 
   - name: "fights"
     label: "Fights"
@@ -249,12 +275,14 @@ collections:
                 name: "media"
                 widget: "object"
                 required: false
-                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video, shown in the result popup. Leave all blank to show a placeholder."
+                hint: "Fill in ONE of Image / YouTube Link / Uploaded Video, shown in the result popup. Leave all blank and the popup shows text only."
                 fields:
                   - { label: "Image", name: "image", widget: "image", required: false }
                   - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
                   - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
                   - { label: "Caption", name: "caption", widget: "string", required: false }
+                  - { label: "Start Time", name: "startTime", widget: "string", required: false, hint: "Optional — use M:SS." }
+                  - { label: "End Time", name: "endTime", widget: "string", required: false, hint: "Optional — use M:SS." }
 
   - name: "fighters"
     label: "Fighters"

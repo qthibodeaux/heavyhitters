@@ -7,6 +7,13 @@
     "orgName": "Kier's Hope Foundation",
     "description": "Working to change the shape of sickle cell disease.",
     "spokesperson": "Led by Kier \"Junior\" Spates, co-host of The Steve Harvey Morning Show.",
-    "media": { "image": "", "youtubeUrl": "", "videoFile": "", "caption": "" }
+    "media": {
+      "image": "",
+      "youtubeUrl": "https://youtu.be/IKYqOyZ6UWA",
+      "videoFile": "",
+      "caption": "",
+      "startTime": "4:56",
+      "endTime": "5:34"
+    }
   }
 }

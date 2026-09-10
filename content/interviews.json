@@ -2,18 +2,29 @@
   "interviews": [
     {
       "label": "Organization",
-      "quote": "Hear from Heavy Hitters Promotions leadership on the vision behind Fighting For A Cause.",
-      "media": { "image": "", "youtubeUrl": "", "videoFile": "", "caption": "" }
-    },
-    {
-      "label": "Fighters",
-      "quote": "Fighters on the card share what stepping into the ring for a cause means to them.",
-      "media": { "image": "", "youtubeUrl": "", "videoFile": "", "caption": "" }
+      "speaker": "Reggie",
+      "quote": "On the parallels between what fighters carry into the ring and what sickle cell patients live with every day.",
+      "media": {
+        "image": "",
+        "youtubeUrl": "https://youtu.be/IKYqOyZ6UWA",
+        "videoFile": "",
+        "caption": "",
+        "startTime": "9:55",
+        "endTime": "10:35"
+      }
     },
     {
       "label": "Community & Charity",
-      "quote": "A look at the community impact and charitable work behind every Fighting For A Cause event.",
-      "media": { "image": "", "youtubeUrl": "https://youtu.be/IKYqOyZ6UWA?si=nNhnl3tT3KciABXP", "videoFile": "", "caption": "" }
+      "speaker": "Marquis",
+      "quote": "On why the work behind every Fighting For A Cause event comes back to the kids.",
+      "media": {
+        "image": "",
+        "youtubeUrl": "https://youtu.be/IKYqOyZ6UWA",
+        "videoFile": "",
+        "caption": "",
+        "startTime": "23:15",
+        "endTime": "23:42"
+      }
     }
   ]
 }
