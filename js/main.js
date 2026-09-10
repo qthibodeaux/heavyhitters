@@ -238,6 +238,29 @@
       heroMediaEl.innerHTML = heroInner;
     }
 
+    /* Social icons are opt-in: each one appears only once a real URL is set,
+       and the whole "Follow" block stays hidden until at least one is. An
+       icon that links nowhere reads as a broken site. */
+    var social = settings.social || {};
+    var socialShown = 0;
+    document.querySelectorAll('[data-social]').forEach(function(link){
+      var url = social[link.getAttribute('data-social')];
+      if(url){
+        link.setAttribute('href', url);
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener');
+        link.classList.remove('is-hidden');
+        socialShown++;
+      } else {
+        link.classList.add('is-hidden');
+      }
+    });
+    var footerSocial = document.getElementById('footerSocial');
+    if(footerSocial) footerSocial.classList.toggle('is-hidden', socialShown === 0);
+    /* Drop the footer to two columns so the vacated third doesn't sit empty. */
+    var footerInner = document.querySelector('.footer-inner');
+    if(footerInner) footerInner.classList.toggle('footer-inner--no-social', socialShown === 0);
+
     var phoneEl = document.getElementById('contactPhone');
     var salesEmailEl = document.getElementById('contactSalesEmail');
     var partnershipsEmailEl = document.getElementById('contactPartnershipsEmail');
@@ -259,7 +282,10 @@
       var el = document.getElementById(id);
       if(el) el.classList.toggle('is-hidden', sections[id] === false);
     });
-    document.querySelectorAll('.main-nav a[href^="#"], .footer-links a[href^="#"]').forEach(function(link){
+    /* Every in-page link, not just the nav — hero buttons and scroll cues
+       point at sections too, and a button that scrolls nowhere is worse
+       than no button at all. */
+    document.querySelectorAll('a[href^="#"]').forEach(function(link){
       var id = link.getAttribute('href').slice(1);
       var hidden = Object.prototype.hasOwnProperty.call(sections, id) && sections[id] === false;
       link.classList.toggle('is-hidden', hidden);

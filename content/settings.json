@@ -14,6 +14,12 @@
     "partnershipsEmail": "heavyhitterscombatsports@gmail.com",
     "office": "Houston, TX"
   },
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "x": "",
+    "youtube": ""
+  },
   "sections": {
     "mission": true,
     "about": true,

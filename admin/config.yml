@@ -133,6 +133,15 @@ collections:
               - { label: "Sponsorships & Sales Email", name: "salesEmail", widget: "string" }
               - { label: "Event & Partnership Inquiries Email", name: "partnershipsEmail", widget: "string" }
               - { label: "Office", name: "office", widget: "string" }
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
+            hint: "Each icon appears in the footer only once its link is filled in — leave one blank and that icon stays hidden rather than linking nowhere. The whole Follow block hides if all four are empty."
+            fields:
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "X / Twitter", name: "x", widget: "string", required: false }
+              - { label: "YouTube", name: "youtube", widget: "string", required: false }
           - label: "Section Visibility"
             name: "sections"
             widget: "object"
