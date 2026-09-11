@@ -19,6 +19,22 @@ collections:
           - { label: "Eyebrow", name: "eyebrow", widget: "string" }
           - { label: "Heading", name: "heading", widget: "string" }
           - { label: "Body", name: "body", widget: "text" }
+          - label: "Awareness Clip (PSA)"
+            name: "psa"
+            widget: "object"
+            hint: "An optional short awareness video shown under the mission copy. Vertical phone video is fine — it sizes itself. Leave the media blank and the whole block disappears."
+            fields:
+              - { label: "Label", name: "label", widget: "string", required: false, hint: "e.g. Sickle Cell Awareness" }
+              - label: "Media"
+                name: "media"
+                widget: "object"
+                fields:
+                  - { label: "Image", name: "image", widget: "image", required: false }
+                  - { label: "YouTube Link", name: "youtubeUrl", widget: "string", required: false }
+                  - { label: "Uploaded Video", name: "videoFile", widget: "file", required: false }
+                  - { label: "Caption", name: "caption", widget: "string", required: false }
+                  - { label: "Start Time", name: "startTime", widget: "string", required: false, hint: "Optional — use M:SS." }
+                  - { label: "End Time", name: "endTime", widget: "string", required: false, hint: "Optional — use M:SS." }
           - label: "Current Event Beneficiary"
             name: "beneficiary"
             widget: "object"
@@ -215,10 +231,10 @@ collections:
             summary: "{{name}} — {{company}}"
             hint: "The What Sponsors Say section stays hidden until there are at least 4 quotes, so it never looks thin. Only use real, attributable quotes from actual sponsors."
             fields:
-              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Quote", name: "quote", widget: "text", hint: "Leave a blank line between paragraphs and they'll render as separate paragraphs." }
               - { label: "Name", name: "name", widget: "string" }
-              - { label: "Title", name: "title", widget: "string", hint: "e.g. Marketing Director" }
-              - { label: "Company", name: "company", widget: "string" }
+              - { label: "Title", name: "title", widget: "string", required: false, hint: "Optional — e.g. Marketing Director" }
+              - { label: "Company", name: "company", widget: "string", required: false, hint: "Optional" }
           - label: "Closing Call-To-Action"
             name: "cta"
             widget: "object"

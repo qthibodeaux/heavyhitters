@@ -54,6 +54,37 @@
     return !!(media.videoFile || (media.youtubeUrl && getYouTubeId(media.youtubeUrl)) || media.image);
   }
 
+  /* ---------- Natural aspect ratio ----------
+     Slots take the shape of whatever is dropped into them rather than
+     forcing everything into one landscape frame — so a vertical reel, a
+     square clip and a wide photo all sit correctly with no letterboxing
+     and no cropped heads. Portrait media also gets capped in width (see
+     the CSS) so it can't run away with the page. */
+  function applyNaturalAspect(slotEl, width, height){
+    if(!slotEl || !width || !height) return;
+    slotEl.style.aspectRatio = width + ' / ' + height;
+    var orientation = 'square';
+    if(height > width * 1.1) orientation = 'portrait';
+    else if(width > height * 1.1) orientation = 'landscape';
+    slotEl.setAttribute('data-orientation', orientation);
+  }
+
+  function trackNaturalAspect(slotEl, mediaEl){
+    if(mediaEl.tagName === 'VIDEO'){
+      mediaEl.addEventListener('loadedmetadata', function(){
+        applyNaturalAspect(slotEl, mediaEl.videoWidth, mediaEl.videoHeight);
+      });
+    } else if(mediaEl.tagName === 'IMG'){
+      if(mediaEl.complete && mediaEl.naturalWidth){
+        applyNaturalAspect(slotEl, mediaEl.naturalWidth, mediaEl.naturalHeight);
+      } else {
+        mediaEl.addEventListener('load', function(){
+          applyNaturalAspect(slotEl, mediaEl.naturalWidth, mediaEl.naturalHeight);
+        });
+      }
+    }
+  }
+
   function renderMediaSlot(el, media, altText){
     if(!el) return false;
     media = media || {};
@@ -89,6 +120,14 @@
 
     el.classList.remove('is-hidden');
     el.innerHTML = inner;
+
+    /* YouTube is always 16:9; uploaded video and images report their own. */
+    if(media.youtubeUrl && !media.videoFile && !media.image){
+      applyNaturalAspect(el, 16, 9);
+    } else {
+      var mediaEl = el.querySelector('video, img');
+      if(mediaEl) trackNaturalAspect(el, mediaEl);
+    }
     return true;
   }
 
@@ -422,6 +461,15 @@
     if(spokespersonEl) spokespersonEl.textContent = beneficiary.spokesperson || '';
 
     renderMediaSlot(document.getElementById('beneficiaryMedia'), beneficiary.media, beneficiary.orgName);
+
+    /* Optional awareness clip alongside the mission copy — vertical social
+       video sizes itself, and the whole block disappears when unset. */
+    var psa = data.psa || {};
+    var psaLabelEl = document.getElementById('missionPsaLabel');
+    if(psaLabelEl) psaLabelEl.textContent = psa.label || '';
+    var psaShown = renderMediaSlot(document.getElementById('missionPsaMedia'), psa.media, psa.label);
+    var psaBlock = document.getElementById('missionPsa');
+    if(psaBlock) psaBlock.classList.toggle('is-hidden', !psaShown);
   }
 
   /* ---------- Render: about from content/about.json ---------- */
@@ -608,10 +656,18 @@
       } else {
         testimonialEl.setAttribute('data-count', String(testimonials.length));
         testimonialEl.innerHTML = testimonials.map(function(t){
+          /* Quotes arrive as one or several paragraphs; keep the breaks. */
+          var quoteHtml = String(t.quote || '').split(/\n{2,}/).map(function(para){
+            return '<p>' + escapeHtml(para.trim()) + '</p>';
+          }).join('');
+          /* Title and company are optional — not every sponsor gave both. */
+          var attribution = escapeHtml(t.name || '');
+          if(t.title) attribution += ', ' + escapeHtml(t.title);
+          if(t.company) attribution += ' &mdash; ' + escapeHtml(t.company);
           return (
             '<figure class="testimonial-card reveal">' +
-              '<blockquote>&ldquo;' + escapeHtml(t.quote) + '&rdquo;</blockquote>' +
-              '<figcaption>' + escapeHtml(t.name) + ', ' + escapeHtml(t.title) + ' &mdash; ' + escapeHtml(t.company) + '</figcaption>' +
+              '<blockquote>' + quoteHtml + '</blockquote>' +
+              '<figcaption>' + attribution + '</figcaption>' +
             '</figure>'
           );
         }).join('');

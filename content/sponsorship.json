@@ -5,8 +5,14 @@
     "body": "Heavy Hitters Promotions puts your brand in front of a passionate, growing fight community — from fight night energy to year-round digital reach. Whether you're looking for regional visibility or a marquee event partnership, we'll build a package that fits your goals."
   },
   "stats": [
-    { "value": "100M+", "label": "Combined Social Reach" },
-    { "value": "6", "label": "Events Per Year" }
+    {
+      "value": "100M+",
+      "label": "Combined Social Reach"
+    },
+    {
+      "value": "6",
+      "label": "Events Per Year"
+    }
   ],
   "offerings": [
     {
@@ -40,70 +46,93 @@
       "name": "Center Canvas Logo",
       "availability": "1 available",
       "featured": true,
-      "benefits": ["Top-center canvas placement — the single most visible spot in the ring", "Featured in every broadcast camera angle and photo"]
+      "benefits": [
+        "Top-center canvas placement — the single most visible spot in the ring",
+        "Featured in every broadcast camera angle and photo"
+      ]
     },
     {
       "category": "Ring & Event Branding",
       "name": "Canvas Branding Around Center",
       "availability": "8 positions available",
       "featured": false,
-      "benefits": ["Canvas placement surrounding the center logo", "Constant visibility throughout every round"]
+      "benefits": [
+        "Canvas placement surrounding the center logo",
+        "Constant visibility throughout every round"
+      ]
     },
     {
       "category": "Ring & Event Branding",
       "name": "Ring Skirt Branding",
       "availability": "4 available",
       "featured": false,
-      "benefits": ["Branding around the ring skirt, visible from every seat and camera angle"]
+      "benefits": [
+        "Branding around the ring skirt, visible from every seat and camera angle"
+      ]
     },
     {
       "category": "Ring & Event Branding",
       "name": "Rope Branding",
       "availability": "4 available (per rope)",
       "featured": false,
-      "benefits": ["Logo placement on the ring ropes, in frame for every knockdown and clinch"]
+      "benefits": [
+        "Logo placement on the ring ropes, in frame for every knockdown and clinch"
+      ]
     },
     {
       "category": "Ring & Event Branding",
       "name": "Ring Post Branding",
       "availability": "4 available",
       "featured": false,
-      "benefits": ["Branding on the ring corner posts, prominent in wide broadcast shots"]
+      "benefits": [
+        "Branding on the ring corner posts, prominent in wide broadcast shots"
+      ]
     },
     {
       "category": "Ring & Event Branding",
       "name": "Corner Pad Branding",
       "availability": "4 available",
       "featured": false,
-      "benefits": ["Branded corner pads seen during every corner break between rounds"]
+      "benefits": [
+        "Branded corner pads seen during every corner break between rounds"
+      ]
     },
     {
       "category": "Ring & Event Branding",
       "name": "Ringside Table Branding",
       "availability": "1 available",
       "featured": false,
-      "benefits": ["Branding at the ringside table, in frame for commentary and broadcast coverage"]
+      "benefits": [
+        "Branding at the ringside table, in frame for commentary and broadcast coverage"
+      ]
     },
     {
       "category": "Core Sponsorship",
       "name": "Presenting Partner",
       "availability": "Top-level partnership",
       "featured": true,
-      "benefits": ["Prominent association with and top-level visibility throughout the Fighting For A Cause event", "Featured across the full promotional campaign"]
+      "benefits": [
+        "Prominent association with and top-level visibility throughout the Fighting For A Cause event",
+        "Featured across the full promotional campaign"
+      ]
     },
     {
       "category": "Core Sponsorship",
       "name": "Championship Partner",
       "availability": "Major sponsorship level",
       "featured": false,
-      "benefits": ["Strong brand visibility and association with the championship event"]
+      "benefits": [
+        "Strong brand visibility and association with the championship event"
+      ]
     },
     {
       "category": "VIP & Corporate Hospitality",
       "name": "VIP Tables",
       "availability": "20 tables available — seating 8 guests each",
       "featured": false,
-      "benefits": ["Ideal for corporate entertainment, client engagement, employee recognition, and networking"]
+      "benefits": [
+        "Ideal for corporate entertainment, client engagement, employee recognition, and networking"
+      ]
     }
   ],
   "customPartnerships": {
@@ -122,7 +151,38 @@
       "Other Customized Event Integrations"
     ]
   },
-  "testimonials": [],
+  "testimonials": [
+    {
+      "quote": "The reason for sponsoring The Heavy Hitters Promotion Event is an opportunity to partner with a revolutionary approach to truly make a difference for those who are fighting life surviving causes, through the efforts of professional pugilist.",
+      "name": "Doug Kelly",
+      "title": "",
+      "company": "D & L Kelly Consulting"
+    },
+    {
+      "quote": "I'm honored to support Fight for a Cause because this is bigger than boxing. It is about using the platform of the sport to bring attention to issues that too often go unseen diseases like sickle cell, the health challenges affecting our communities, and the fighters who have sacrificed their bodies and lives to the sport without always receiving the care, recognition, or compensation they deserve.\n\nSupporting Fight for a Cause means supporting awareness, advocacy, dignity, and community. When boxing becomes a vehicle for purpose, everybody wins. That is why I'm proud to stand no behind this movement.",
+      "name": "Moses Stryker",
+      "title": "",
+      "company": ""
+    },
+    {
+      "quote": "We believe this event represents a new model for professional boxing—where the spotlight of a major boxing production is intentionally placed behind a meaningful cause. Sponsors will not simply have their names displayed at an event; they will become part of the story and legacy of a night designed to bring people together and create measurable community impact.",
+      "name": "Nathan Hale",
+      "title": "",
+      "company": "Amerex Energy"
+    },
+    {
+      "quote": "Fighting for a Cause. This is where business meets boxing. Where entertainment meets purpose. And where Houston comes together to fight for something bigger than the final bell.",
+      "name": "Carl Guillory",
+      "title": "",
+      "company": "Citi Street's Limo"
+    },
+    {
+      "quote": "For the first time, bringing together the excitement, energy, and prestige of professional boxing with a powerful mission that reaches far beyond the ring. \"Bringing Vegas to Houston for One Night\" is more than a boxing event—it is an opportunity to use the sport we love as a platform to make a meaningful difference in the lives of individuals and families affected by sickle cell disease.\n\nThis groundbreaking event will showcase world-class professional boxing while shining a spotlight on a cause that deserves greater awareness, support, and resources. Every bell, every round, and every victory will represent something bigger: the strength, resilience, and determination of those living with sickle cell disease. We believe boxing has the power to unite communities, inspire action, and create an impact that lasts long after the final bell.",
+      "name": "John Meerdo",
+      "title": "",
+      "company": "Guidant Measurement"
+    }
+  ],
   "cta": {
     "heading": "Why This One Matters",
     "media": {
