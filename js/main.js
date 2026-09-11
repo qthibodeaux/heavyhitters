@@ -67,6 +67,9 @@
     if(height > width * 1.1) orientation = 'portrait';
     else if(width > height * 1.1) orientation = 'landscape';
     slotEl.setAttribute('data-orientation', orientation);
+    /* Callers that lay out around the media (see the mission rail) need the
+       shape, which for uploaded files only arrives once metadata loads. */
+    if(typeof slotEl.onNaturalAspect === 'function') slotEl.onNaturalAspect(orientation);
   }
 
   function trackNaturalAspect(slotEl, mediaEl){
@@ -85,9 +88,10 @@
     }
   }
 
-  function renderMediaSlot(el, media, altText){
+  function renderMediaSlot(el, media, altText, onOrientation){
     if(!el) return false;
     media = media || {};
+    el.onNaturalAspect = onOrientation || null;
 
     if(!hasMedia(media)){
       el.innerHTML = '';
@@ -467,9 +471,22 @@
     var psa = data.psa || {};
     var psaLabelEl = document.getElementById('missionPsaLabel');
     if(psaLabelEl) psaLabelEl.textContent = psa.label || '';
-    var psaShown = renderMediaSlot(document.getElementById('missionPsaMedia'), psa.media, psa.label);
+    var grid = document.getElementById('missionGrid');
+    /* Assume wide until the media reports its shape — an uploaded file only
+       does so on loadedmetadata, and the callback may fire either side of
+       this call depending on whether the browser already had it cached. */
+    if(grid) grid.setAttribute('data-psa', 'wide');
+    var psaShown = renderMediaSlot(
+      document.getElementById('missionPsaMedia'),
+      psa.media,
+      psa.label,
+      function(orientation){
+        if(grid) grid.setAttribute('data-psa', orientation === 'portrait' ? 'portrait' : 'wide');
+      }
+    );
     var psaBlock = document.getElementById('missionPsa');
     if(psaBlock) psaBlock.classList.toggle('is-hidden', !psaShown);
+    if(!psaShown && grid) grid.setAttribute('data-psa', 'none');
   }
 
   /* ---------- Render: about from content/about.json ---------- */
