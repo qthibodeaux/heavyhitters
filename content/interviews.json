@@ -25,6 +25,13 @@
         "startTime": "23:15",
         "endTime": "23:42"
       }
+    },
+    {
+      "label": "Test",
+      "media": {
+        "youtubeUrl": "https://youtu.be/IKYqOyZ6UWA"
+      },
+      "quote": "This is a test."
     }
   ]
 }
