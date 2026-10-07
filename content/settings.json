@@ -31,6 +31,6 @@
     "news": false,
     "sponsorship": true,
     "results": false,
-    "schedule": false
+    "schedule": true
   }
 }
