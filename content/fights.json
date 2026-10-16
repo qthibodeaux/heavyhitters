@@ -7,13 +7,44 @@
       "status": "upcoming",
       "title": "Fighting For A Cause",
       "fighterA": {
-        "name": "TBD",
-        "record": "2-0-0 (2KOs)"
+        "name": "Emmanuel 'CUJO' Valencia",
+        "record": "Professional Debut",
+        "photo": ""
       },
       "fighterB": {
         "name": "TBD",
         "record": "TBD"
       }
+    },
+    {
+      "ticketLink": "#contact",
+      "fighterA": {
+        "name": "Daniel 'The Technician' Arceneaux",
+        "record": "2-0-0 (2 KOs)"
+      },
+      "fighterB": {
+        "name": "TBD",
+        "record": "TBD"
+      },
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": "January 30, 2027"
+    },
+    {
+      "ticketLink": "#contact",
+      "fighterA": {
+        "name": "Carjon 'The Chef' Roberts",
+        "record": "2-0-0 (1 KO)"
+      },
+      "fighterB": {
+        "name": "TBD",
+        "record": "TBD"
+      },
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": "January 30, 2027"
     }
   ]
 }
