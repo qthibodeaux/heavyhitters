@@ -32,7 +32,8 @@
       "status": "upcoming",
       "title": "Fighting For A Cause",
       "date": "2027-01-30T18:00:00.000-06:00",
-      "dateLabel": "January 30, 2027"
+      "dateLabel": "January 30, 2027",
+      "weightClass": "Super Welterweight Bout"
     },
     {
       "ticketLink": "#contact",
@@ -48,7 +49,8 @@
       "status": "upcoming",
       "title": "Fighting For A Cause",
       "date": "2027-01-30T18:00:00.000-06:00",
-      "dateLabel": "January 30, 2027"
+      "dateLabel": "January 30, 2027",
+      "weightClass": "Super Welterweight Bout"
     },
     {
       "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
@@ -59,6 +61,23 @@
       "fighterA": {
         "name": "Kanye Dillian Gee",
         "record": "2-1-0 "
+      },
+      "fighterB": {
+        "name": "TBA",
+        "record": "TBA"
+      },
+      "weightClass": "Lightweight Bout"
+    },
+    {
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
+      "status": "upcoming",
+      "title": "Fight For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": "January 30, 207",
+      "weightClass": "Cruiserweight Bout",
+      "fighterA": {
+        "name": "TBA",
+        "record": "TBA"
       },
       "fighterB": {
         "name": "TBA",
