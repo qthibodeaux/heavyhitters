@@ -9,22 +9,23 @@
       "fighterA": {
         "name": "Emmanuel 'CUJO' Valencia",
         "record": "Professional Debut",
-        "photo": ""
+        "photo": "/img/uploads/cujo-1.jpg"
       },
       "fighterB": {
-        "name": "TBD",
-        "record": "TBD"
+        "name": "TBA",
+        "record": "TBA"
       }
     },
     {
       "ticketLink": "#contact",
       "fighterA": {
         "name": "Daniel 'The Technician' Arceneaux",
-        "record": "2-0-0 (2 KOs)"
+        "record": "2-0-0 (2 KOs)",
+        "photo": "/img/uploads/deno.jpg"
       },
       "fighterB": {
-        "name": "TBD",
-        "record": "TBD"
+        "name": "TBA",
+        "record": "TBA"
       },
       "status": "upcoming",
       "title": "Fighting For A Cause",
@@ -35,11 +36,12 @@
       "ticketLink": "#contact",
       "fighterA": {
         "name": "Carjon 'The Chef' Roberts",
-        "record": "2-0-0 (1 KO)"
+        "record": "2-0-0 (1 KO)",
+        "photo": "/img/uploads/carjon.jpg"
       },
       "fighterB": {
-        "name": "TBD",
-        "record": "TBD"
+        "name": "TBA",
+        "record": "TBA"
       },
       "status": "upcoming",
       "title": "Fighting For A Cause",
