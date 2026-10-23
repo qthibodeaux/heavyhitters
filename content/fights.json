@@ -1,11 +1,7 @@
 {
   "fights": [
     {
-      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
-      "date": "2027-01-30T18:00:00.000-06:00",
-      "dateLabel": "January 30, 2027",
-      "status": "upcoming",
-      "title": "Fighting For A Cause",
+      "weightClass": "Lightweight Bout",
       "fighterA": {
         "name": "Emmanuel 'CUJO' Valencia",
         "record": "Professional Debut",
@@ -14,7 +10,13 @@
       "fighterB": {
         "name": "TBA",
         "record": "TBA"
-      }
+      },
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
+      "dateLabel": "January 30, 2027",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "venue": "The Hall at Ironworks",
+      "status": "upcoming",
+      "title": "Fighting For A Cause"
     },
     {
       "ticketLink": "#contact",
@@ -47,6 +49,21 @@
       "title": "Fighting For A Cause",
       "date": "2027-01-30T18:00:00.000-06:00",
       "dateLabel": "January 30, 2027"
+    },
+    {
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": "January 30, 2027",
+      "fighterA": {
+        "name": "Kanye Dillian Gee",
+        "record": "2-1-0 "
+      },
+      "fighterB": {
+        "name": "TBA",
+        "record": "TBA"
+      }
     }
   ]
 }
