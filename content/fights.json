@@ -83,6 +83,23 @@
         "name": "TBA",
         "record": "TBA"
       }
+    },
+    {
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": "January 30, 2027",
+      "weightClass": "Super Middleweight Bout",
+      "fighterA": {
+        "name": "Jordan Otey-Wilson",
+        "photo": "/img/uploads/jordan.jpg",
+        "record": "TBA"
+      },
+      "fighterB": {
+        "name": "TBA",
+        "record": "TBA"
+      }
     }
   ]
 }
