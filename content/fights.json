@@ -8,7 +8,7 @@
         "photo": "/img/uploads/cujo-1.jpg"
       },
       "fighterB": {
-        "name": "TBA",
+        "name": "De'Sean Maxwell",
         "record": "TBA"
       },
       "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
@@ -26,7 +26,7 @@
         "photo": "/img/uploads/deno.jpg"
       },
       "fighterB": {
-        "name": "TBA",
+        "name": "Damon Pittman",
         "record": "TBA"
       },
       "status": "upcoming",
@@ -43,7 +43,7 @@
         "photo": "/img/uploads/carjon.jpg"
       },
       "fighterB": {
-        "name": "TBA",
+        "name": "Daryl Adams Jr",
         "record": "TBA"
       },
       "status": "upcoming",
@@ -63,8 +63,8 @@
         "record": "2-1-0 "
       },
       "fighterB": {
-        "name": "TBA",
-        "record": "TBA"
+        "name": "Treverrious Zeno",
+        "record": "1-2-0"
       },
       "weightClass": "Lightweight Bout"
     },
@@ -76,12 +76,12 @@
       "dateLabel": "January 30, 207",
       "weightClass": "Cruiserweight Bout",
       "fighterA": {
-        "name": "TBA",
-        "record": "TBA"
+        "name": "Eric Jones",
+        "record": "Professional Debut"
       },
       "fighterB": {
-        "name": "TBA",
-        "record": "TBA"
+        "name": "Louis Banks",
+        "record": "0-1-0"
       }
     },
     {
@@ -92,13 +92,14 @@
       "dateLabel": "January 30, 2027",
       "weightClass": "Super Middleweight Bout",
       "fighterA": {
-        "name": "Jordan Otey-Wilson",
-        "photo": "/img/uploads/jordan.jpg",
-        "record": "TBA"
+        "name": "Rheco Marshall",
+        "photo": "",
+        "record": "Professional Debut"
       },
       "fighterB": {
-        "name": "TBA",
-        "record": "TBA"
+        "name": "Jordan Otey-Wilson",
+        "record": "0-2-0",
+        "photo": "/img/uploads/jordan.jpg"
       }
     }
   ]
