@@ -19,7 +19,23 @@
       "title": "Fighting For A Cause"
     },
     {
-      "ticketLink": "#contact",
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": " January 30, 2027",
+      "fighterA": {
+        "name": "Ray 'Alief Ali' Talib Jr",
+        "record": "10-1-0 (3 KOs)"
+      },
+      "weightClass": "Super Welterweight Bout",
+      "fighterB": {
+        "name": "Javier 'El Diamante' Vargas",
+        "record": "11-2-1 (5 KOs)"
+      }
+    },
+    {
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
       "fighterA": {
         "name": "Daniel 'The Technician' Arceneaux",
         "record": "2-0-0 (2 KOs)",
@@ -36,7 +52,7 @@
       "weightClass": "Super Welterweight Bout"
     },
     {
-      "ticketLink": "#contact",
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
       "fighterA": {
         "name": "Carjon 'The Chef' Roberts",
         "record": "2-0-0 (1 KO)",
@@ -103,7 +119,7 @@
       }
     },
     {
-      "ticketLink": "#contact",
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
       "status": "upcoming",
       "title": "Fighting For A Cause",
       "date": "2027-01-31T18:00:00.000-06:00",
