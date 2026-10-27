@@ -101,6 +101,22 @@
         "record": "0-2-0",
         "photo": "/img/uploads/jordan.jpg"
       }
+    },
+    {
+      "ticketLink": "#contact",
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-31T18:00:00.000-06:00",
+      "dateLabel": "January 30, 2027",
+      "weightClass": "Welterweight Bout",
+      "fighterA": {
+        "name": "Allen McDonald",
+        "record": "1-0-0"
+      },
+      "fighterB": {
+        "name": "Tarique Fisher",
+        "record": "0-1-0"
+      }
     }
   ]
 }
