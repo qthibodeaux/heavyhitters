@@ -133,6 +133,38 @@
         "name": "Tarique Fisher",
         "record": "0-1-0"
       }
+    },
+    {
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": "January 30, 2027",
+      "weightClass": "Middleweight Bout",
+      "fighterA": {
+        "name": "Imaud Louis",
+        "record": "8-4-0 (5 KOs)"
+      },
+      "fighterB": {
+        "name": "TBA",
+        "record": "TBA"
+      }
+    },
+    {
+      "ticketLink": "https://heavyhitterspromotions.ticketspice.com/-fighting-for-a-cause-2026",
+      "status": "upcoming",
+      "title": "Fighting For A Cause",
+      "date": "2027-01-30T18:00:00.000-06:00",
+      "dateLabel": "January 30, 2027",
+      "weightClass": "Lightweight Bout",
+      "fighterA": {
+        "name": "Brittney Cloudy",
+        "record": "0-0-0"
+      },
+      "fighterB": {
+        "name": "TBA",
+        "record": "TBA"
+      }
     }
   ]
 }
